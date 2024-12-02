@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* If you need custom CSS variables, add them here */
+:root {
+  --border: 220 13% 91%; /* Example value, adjust as needed */
+}

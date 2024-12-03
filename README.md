@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PIONEXT Platform
+
+PIONEXT is a hybrid investment platform combining crowdfunding mechanics with automated market making (AMM) through bonding curves. The platform enables builders to raise funds while providing investors with liquid trading opportunities.
+
+## Core Features
+
+- **Project Funding**: Builders can raise funds through credit sales
+- **Bonding Curves**: Automated price discovery based on supply/demand
+- **Credit System**: 
+  - Platform credits (PIONEXT) fixed at 1:1 with USD
+  - Project-specific credits tradeable through bonding curves
+  - Early investors benefit from discounted rates (up to 60% off)
+
+## Technical Stack (MVP)
+
+- Centralized architecture (non-blockchain)
+- Data mirroring to Internet Computer Protocol (ICP)
+- Standardized bonding curve implementation
+- Database-managed credit system
+
+## Project Status
+
+This is an MVP (Minimum Viable Product) with the following limitations:
+- No direct fiat currency integration
+- No token-to-fiat conversion
+- Simplified token economics
+- Basic user profiles
 
 ## Getting Started
 
-First, run the development server:
+### For Builders
+1. Register and verify account
+2. Submit project details and documentation
+3. Once approved, launch credit sales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### For Investors
+1. Create account
+2. Purchase PIONEXT credits
+3. Invest in project credits
+4. Trade credits using bonding curves
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[Add development setup instructions, dependencies, and contribution guidelines here]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Add license information here]

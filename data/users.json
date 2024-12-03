@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": "usr_1",
+      "username": "johndoe",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "bio": "Experienced blockchain developer and entrepreneur with a passion for decentralized finance. Previously built successful DeFi protocols and Web3 applications.",
+      "role": "builder",
+      "joinedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "usr_2",
+      "username": "janesmith",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "bio": "Full-stack developer specializing in DeFi protocols and cross-chain bridges. Previously led development at major crypto projects.",
+      "role": "builder",
+      "joinedAt": "2024-01-20T00:00:00Z"
+    },
+    {
+      "id": "usr_3",
+      "username": "alice",
+      "name": "Alice Wilson",
+      "email": "alice@example.com",
+      "role": "user",
+      "joinedAt": "2024-02-01T00:00:00Z"
+    },
+    {
+      "id": "usr_4",
+      "username": "bob",
+      "name": "Bob Johnson",
+      "email": "bob@example.com",
+      "role": "user",
+      "joinedAt": "2024-02-15T00:00:00Z"
+    }
+  ]
+} 

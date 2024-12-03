@@ -1,0 +1,18 @@
+{
+  "holdings": [
+    {
+      "id": "hold_1",
+      "creditId": "cred_1",
+      "userId": "usr_1",
+      "balance": 1000,
+      "lastUpdated": "2024-03-20T12:00:00Z"
+    },
+    {
+      "id": "hold_2",
+      "creditId": "cred_2",
+      "userId": "usr_2",
+      "balance": 2000,
+      "lastUpdated": "2024-03-20T12:00:00Z"
+    }
+  ]
+} 

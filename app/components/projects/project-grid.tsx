@@ -1,35 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProjectCard } from "./project-card";
 import { Button } from "@/components/ui/button";
+import projectsData from "@/data/projects.json";
+import creditsData from "@/data/credits.json";
 
-// TODO: Replace with actual project type from your backend
 interface Project {
   id: string;
   name: string;
   description: string;
-  tokenPrice: number;
-  amountRaised: number;
-  fundingGoal: number;
   launchDate: string;
+  status: "Active" | "Completed" | "Upcoming";
+  creditId?: string;
+}
+
+interface Credit {
+  id: string;
+  projectId: string;
+  currentSupply: number;
+  maxSupply: number;
+  initialPrice: number;
+  slope: number;
 }
 
 export function ProjectGrid() {
   const [isLoading, setIsLoading] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([
-    // Sample data - replace with actual API call
-    {
-      id: "1",
-      name: "Sample Project 1",
-      description: "This is a sample project description that spans multiple lines to demonstrate how the card handles longer text content.",
-      tokenPrice: 0.5,
-      amountRaised: 50000,
-      fundingGoal: 100000,
-      launchDate: "2023-12-01",
-    },
-    // Add more sample projects as needed
-  ]);
+  const [projects, setProjects] = useState<(Project & { credit?: Credit })[]>([]);
+
+  useEffect(() => {
+    // Simulate API call with our JSON data
+    const loadProjects = () => {
+      const projectsWithCredits = projectsData.projects.map(project => {
+        const credit = creditsData.credits.find(c => c.projectId === project.id);
+        return { ...project, credit };
+      });
+      setProjects(projectsWithCredits);
+    };
+
+    loadProjects();
+  }, []);
 
   const loadMore = async () => {
     setIsLoading(true);
@@ -50,7 +60,21 @@ export function ProjectGrid() {
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard 
+            key={project.id} 
+            project={{
+              ...project,
+              tokenPrice: project.credit ? 
+                project.credit.initialPrice + (project.credit.slope * project.credit.currentSupply) : 
+                0,
+              amountRaised: project.credit ? 
+                project.credit.currentSupply * (project.credit.initialPrice + (project.credit.slope * project.credit.currentSupply / 2)) : 
+                0,
+              fundingGoal: project.credit ? 
+                project.credit.maxSupply * (project.credit.initialPrice + (project.credit.slope * project.credit.maxSupply / 2)) : 
+                0
+            }} 
+          />
         ))}
       </div>
       

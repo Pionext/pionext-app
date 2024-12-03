@@ -2,29 +2,24 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useProjectCredits } from "@/hooks/use-project-credits";
 
 interface ProjectOverviewProps {
   projectId: string;
+  description: string;
 }
 
-export function ProjectOverview({ projectId }: ProjectOverviewProps) {
-  // TODO: Fetch project data
-  const project = {
-    description: `This is a sample project description. It can contain multiple paragraphs and formatting.
+export function ProjectOverview({ projectId, description }: ProjectOverviewProps) {
+  const { credits } = useProjectCredits(projectId);
 
-    The project aims to revolutionize the way we think about decentralized finance and community-driven development.
-    
-    Key features:
-    • Feature 1
-    • Feature 2
-    • Feature 3`,
-    amountRaised: 50000,
-    fundingGoal: 100000,
-    totalTokens: 1000000,
-    yourBalance: 0,
-  };
+  if (!credits) {
+    return null;
+  }
 
-  const progress = (project.amountRaised / project.fundingGoal) * 100;
+  const currentPrice = credits.initialPrice + (credits.slope * credits.currentSupply);
+  const amountRaised = credits.currentSupply * (credits.initialPrice + (credits.slope * credits.currentSupply / 2));
+  const fundingGoal = credits.maxSupply * (credits.initialPrice + (credits.slope * credits.maxSupply / 2));
+  const progress = (amountRaised / fundingGoal) * 100;
 
   return (
     <Card>
@@ -34,7 +29,7 @@ export function ProjectOverview({ projectId }: ProjectOverviewProps) {
       <CardContent className="space-y-6">
         {/* Description */}
         <div className="prose prose-sm max-w-none">
-          {project.description.split('\n').map((paragraph, index) => (
+          {description.split('\n').map((paragraph, index) => (
             <p key={index} className="whitespace-pre-line">
               {paragraph}
             </p>
@@ -48,7 +43,8 @@ export function ProjectOverview({ projectId }: ProjectOverviewProps) {
             <div className="flex justify-between text-sm">
               <span className="text-gray-500">Amount Raised</span>
               <span className="font-medium">
-                ${project.amountRaised.toLocaleString()} / ${project.fundingGoal.toLocaleString()}
+                ${amountRaised.toLocaleString(undefined, { maximumFractionDigits: 2 })} / 
+                ${fundingGoal.toLocaleString(undefined, { maximumFractionDigits: 2 })}
               </span>
             </div>
             <Progress value={progress} className="h-2" />
@@ -57,15 +53,19 @@ export function ProjectOverview({ projectId }: ProjectOverviewProps) {
 
         {/* Token Stats */}
         <div>
-          <h3 className="font-semibold mb-4">Token Information</h3>
+          <h3 className="font-semibold mb-4">Credit Information</h3>
           <div className="space-y-4">
             <div className="flex justify-between">
-              <span className="text-gray-500">Total Tokens Issued</span>
-              <span className="font-medium">{project.totalTokens.toLocaleString()}</span>
+              <span className="text-gray-500">Current Price</span>
+              <span className="font-medium">${currentPrice.toFixed(4)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">Your Balance</span>
-              <span className="font-medium">{project.yourBalance.toLocaleString()} tokens</span>
+              <span className="text-gray-500">Total Credits</span>
+              <span className="font-medium">{credits.maxSupply.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">Credits Issued</span>
+              <span className="font-medium">{credits.currentSupply.toLocaleString()}</span>
             </div>
           </div>
         </div>

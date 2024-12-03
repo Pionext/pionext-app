@@ -5,17 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 
 interface BuilderInfoProps {
-  projectId: string;
+  builder: {
+    id: string;
+    username: string;
+    name: string;
+    email: string;
+    bio?: string;
+    role: "builder" | "user";
+  };
 }
 
-export function BuilderInfo({ projectId }: BuilderInfoProps) {
-  // TODO: Fetch builder data
-  const builder = {
-    name: "John Doe",
-    username: "@johndoe",
-    bio: "Experienced blockchain developer and entrepreneur with a passion for decentralized finance. Previously built successful DeFi protocols and Web3 applications.",
-    contactEmail: "john@example.com",
-  };
+export function BuilderInfo({ builder }: BuilderInfoProps) {
+  if (!builder || builder.role !== "builder") {
+    return null;
+  }
 
   return (
     <Card>
@@ -25,19 +28,21 @@ export function BuilderInfo({ projectId }: BuilderInfoProps) {
       <CardContent className="space-y-6">
         <div>
           <h3 className="text-xl font-semibold">{builder.name}</h3>
-          <p className="text-sm text-gray-500">{builder.username}</p>
+          <p className="text-sm text-gray-500">@{builder.username}</p>
         </div>
 
-        <div>
-          <p className="text-sm text-gray-600 leading-relaxed">
-            {builder.bio}
-          </p>
-        </div>
+        {builder.bio && (
+          <div>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              {builder.bio}
+            </p>
+          </div>
+        )}
 
         <Button 
           variant="outline" 
           className="w-full"
-          onClick={() => window.location.href = `mailto:${builder.contactEmail}`}
+          onClick={() => window.location.href = `mailto:${builder.email}`}
         >
           <Mail className="mr-2 h-4 w-4" />
           Contact Builder

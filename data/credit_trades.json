@@ -1,0 +1,22 @@
+{
+  "trades": [
+    {
+      "id": "trd_1",
+      "creditId": "cred_1",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.52,
+      "timestamp": "2024-03-20T12:00:00Z",
+      "userId": "usr_1"
+    },
+    {
+      "id": "trd_2",
+      "creditId": "cred_1",
+      "type": "sell",
+      "amount": 50,
+      "price": 0.54,
+      "timestamp": "2024-03-20T14:00:00Z",
+      "userId": "usr_2"
+    }
+  ]
+} 

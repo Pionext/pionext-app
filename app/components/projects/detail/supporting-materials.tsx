@@ -1,33 +1,17 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
 interface SupportingMaterialsProps {
-  projectId: string;
+  materials: {
+    title: string;
+    url: string;
+    type: "PDF" | "Video" | "Website" | "Other";
+  }[];
 }
 
-export function SupportingMaterials({ projectId }: SupportingMaterialsProps) {
-  // TODO: Fetch project data
-  const materials = [
-    {
-      title: "Pitch Deck",
-      url: "https://example.com/pitch-deck.pdf",
-      type: "PDF",
-    },
-    {
-      title: "Demo Video",
-      url: "https://youtube.com/watch?v=demo",
-      type: "Video",
-    },
-    {
-      title: "Project Website",
-      url: "https://project-website.com",
-      type: "Website",
-    },
-  ];
-
+export function SupportingMaterials({ materials }: SupportingMaterialsProps) {
   return (
     <Card>
       <CardHeader>

@@ -55,11 +55,6 @@ export function TradingSection({ projectId }: TradingSectionProps) {
   const currentPrice = getBondingCurvePrice(currentSupply);
   const simulatedPrice = getBondingCurvePrice(currentSupply + simulatedAmount);
 
-  // Calculate price impact for the trade amount
-  const tradeAmount = Number(amount) || 0;
-  const tradePriceImpact = getBondingCurvePrice(currentSupply + tradeAmount) - currentPrice;
-  const totalTradePrice = tradeAmount * (currentPrice + tradePriceImpact / 2); // Average price * amount
-
   return (
     <div className="space-y-8">
       {/* Funding Progress Card */}
@@ -177,7 +172,7 @@ export function TradingSection({ projectId }: TradingSectionProps) {
               defaultValue={[0]}
               max={20000}
               step={1000}
-              onValueChange={(value: number[]) => setSimulatedAmount(value[0])}
+              onValueChange={([value]) => setSimulatedAmount(value)}
             />
             <div className="flex justify-between text-sm">
               <span>Amount: {simulatedAmount} credits</span>
@@ -221,11 +216,11 @@ export function TradingSection({ projectId }: TradingSectionProps) {
               <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
                 <div className="flex justify-between text-sm">
                   <span>Price Impact</span>
-                  <span>{tradePriceImpact.toFixed(4)} (~{(tradePriceImpact / currentPrice * 100).toFixed(2)}%)</span>
+                  <span>{priceImpact.toFixed(4)} (~{(priceImpact / estimatedPrice * 100).toFixed(2)}%)</span>
                 </div>
                 <div className="flex justify-between text-sm font-medium">
                   <span>Total {action === 'buy' ? 'Cost (PIONEXT)' : 'Receive (PIONEXT)'}</span>
-                  <span>${totalTradePrice.toFixed(2)}</span>
+                  <span>${estimatedPrice.toFixed(2)}</span>
                 </div>
               </div>
             )}

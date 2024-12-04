@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import { useCreateProject } from '@/hooks/use-create-project';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { calculateTotalRaise, getBondingCurvePoints } from "@/utils/bonding-curve";
+import { calculateTotalRaise, getBondingCurvePoints, calculateCurrentRaise } from "@/utils/bonding-curve";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const formSchema = z.object({
@@ -294,8 +294,45 @@ export function ProjectForm() {
                             tickFormatter={(value) => `$${value.toFixed(2)}`}
                           />
                           <Tooltip 
-                            formatter={(value: number) => `$${value.toFixed(4)}`}
-                            labelFormatter={(label) => `Supply: ${label.toLocaleString()}`}
+                            content={({ active, payload }) => {
+                              if (!active || !payload?.length) return null;
+                              const data = payload[0].payload;
+                              const currentRaise = calculateCurrentRaise({
+                                currentSupply: data.supply,
+                                maxSupply
+                              });
+
+                              return (
+                                <div className="rounded-lg border bg-white p-3 shadow-sm">
+                                  <div className="grid gap-2">
+                                    <div className="flex flex-col">
+                                      <span className="text-[0.70rem] uppercase text-muted-foreground">
+                                        Supply
+                                      </span>
+                                      <span className="font-bold">
+                                        {Math.round(data.supply).toLocaleString()} credits
+                                      </span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <span className="text-[0.70rem] uppercase text-muted-foreground">
+                                        Price
+                                      </span>
+                                      <span className="font-bold">
+                                        ${data.price.toFixed(4)}
+                                      </span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <span className="text-[0.70rem] uppercase text-muted-foreground">
+                                        Total Raised
+                                      </span>
+                                      <span className="font-bold">
+                                        ${currentRaise.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            }}
                           />
                           <Line 
                             type="monotone" 

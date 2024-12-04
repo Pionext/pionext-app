@@ -30,9 +30,9 @@ export async function POST(req: Request) {
     const newCredits = {
       id: `cred_${creditsData.credits.length + 1}`,
       projectId: newProject.id,
-      symbol: data.name.substring(0, 4).toUpperCase(),
+      symbol: data.creditSymbol,
       name: `${data.name} Credits`,
-      targetPrice: data.initialPrice,
+      targetPrice: 1,
       currentSupply: 0,
       maxSupply: data.maxSupply
     };

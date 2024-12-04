@@ -97,3 +97,15 @@ export function simulateSale(amount: number, params: BondingCurveParams): SaleRe
     newSupply
   };
 }
+
+export function calculateTotalRaise(params: BondingCurveParams): number {
+  // This calculates how much money would be raised if all tokens were sold
+  // Uses the same integral as calculateCost but from 0 to maxSupply
+  return calculateCost(0, params.maxSupply, params);
+}
+
+// For convenience, also add a function to calculate raise up to current supply
+export function calculateCurrentRaise(params: BondingCurveParams): number {
+  // This calculates how much money has been raised so far
+  return calculateCost(0, params.currentSupply, params);
+}

@@ -34,6 +34,17 @@
           "type": "PDF"
         }
       ]
+    },
+    {
+      "id": "proj_3",
+      "name": "Fun COin",
+      "description": "col col col col ",
+      "maxSupply": 10000,
+      "initialPrice": 1,
+      "materials": [],
+      "launchDate": "2024-12-04",
+      "status": "Active",
+      "userId": "usr_1"
     }
   ]
-} 
+}

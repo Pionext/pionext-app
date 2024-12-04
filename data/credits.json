@@ -8,6 +8,15 @@
       "targetPrice": 1,
       "currentSupply": 1000,
       "maxSupply": 60000
+    },
+    {
+      "id": "cred_2",
+      "projectId": "proj_3",
+      "symbol": "FUN ",
+      "name": "Fun COin Credits",
+      "targetPrice": 1,
+      "currentSupply": 0,
+      "maxSupply": 10000
     }
   ]
 }

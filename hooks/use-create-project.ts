@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import projectsData from '@/data/projects.json';
+import { calculateRequiredMaxSupply } from '@/utils/bonding-curve';
 
 interface CreateProjectData {
   name: string;
   description: string;
-  maxSupply: number;
-  initialPrice: number;
+  creditSymbol: string;
+  targetRaise: number;
   materials: {
     title: string;
     url: string;
@@ -24,17 +25,29 @@ export function useCreateProject() {
     setError(null);
 
     try {
+      const maxSupply = calculateRequiredMaxSupply(data.targetRaise);
+      console.log('Sending data:', { ...data, maxSupply });
+      
       const response = await fetch('/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          maxSupply,
+        }),
       });
 
-      if (!response.ok) throw new Error('Failed to create project');
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Server error:', errorData);
+        throw new Error(errorData.error || 'Failed to create project');
+      }
       
       const newProject = await response.json();
+      console.log('Created project:', newProject);
       return newProject;
     } catch (err) {
+      console.error('Creation error:', err);
       setError(err instanceof Error ? err.message : 'Failed to create project');
       throw err;
     } finally {

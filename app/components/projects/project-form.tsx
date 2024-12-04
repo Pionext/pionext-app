@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import { useCreateProject } from '@/hooks/use-create-project';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { calculateTotalRaise, getBondingCurvePoints, calculateCurrentRaise } from "@/utils/bonding-curve";
+import { calculateTotalRaise, getBondingCurvePoints, calculateCurrentRaise, calculateRequiredMaxSupply } from "@/utils/bonding-curve";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const formSchema = z.object({
@@ -38,14 +38,14 @@ const formSchema = z.object({
     message: "Project description must be at least 10 characters.",
   }),
   creditSymbol: z.string().min(1).max(4).toUpperCase(),
-  maxSupply: z.number().min(1, {
-    message: "Maximum supply must be greater than 0.",
+  targetRaise: z.number().min(1000, {
+    message: "Minimum fundraising target is $1,000",
   }),
   materials: z.array(z.object({
     title: z.string().min(1, { message: "Title is required" }),
     url: z.string().url({ message: "Please enter a valid URL" }),
     type: z.enum(["PDF", "Video", "Website", "Other"])
-  }))
+  })).min(1, { message: "At least one supporting material is required" })
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -58,7 +58,7 @@ export function ProjectForm() {
       name: "",
       description: "",
       creditSymbol: "",
-      maxSupply: 0,
+      targetRaise: 0,
       materials: []
     }
   });
@@ -66,9 +66,19 @@ export function ProjectForm() {
   const { createProject, isLoading, error } = useCreateProject();
 
   const onSubmit = async (data: FormData) => {
+    console.log('Submit triggered with data:', data);
     try {
-      await createProject(data);
-      router.push("/projects");
+      if (!data.name || !data.description || !data.creditSymbol || !data.targetRaise) {
+        console.error('Missing required fields:', { data });
+        return;
+      }
+
+      const result = await createProject(data);
+      console.log('Creation successful:', result);
+      
+      if (result) {
+        router.push("/projects");
+      }
     } catch (error) {
       console.error("Failed to create project:", error);
     }
@@ -82,7 +92,7 @@ export function ProjectForm() {
     ]);
   };
 
-  const maxSupply = form.watch("maxSupply");
+  const maxSupply = calculateRequiredMaxSupply(form.watch("targetRaise") || 0);
   const bondingCurvePoints = getBondingCurvePoints({ currentSupply: 0, maxSupply });
   const potentialRaise = calculateTotalRaise({ currentSupply: 0, maxSupply });
 
@@ -90,13 +100,36 @@ export function ProjectForm() {
   const watchedFields = form.watch();
   const isDetailsComplete = watchedFields.name && 
     watchedFields.description && 
-    watchedFields.materials.length > 0;
+    watchedFields.materials.length > 0 && 
+    watchedFields.materials.every(m => m.title && m.url && m.type);
   const isCreditsComplete = watchedFields.creditSymbol && 
-    watchedFields.maxSupply > 0;
+    watchedFields.targetRaise > 0;
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form 
+        onSubmit={async (e) => {
+          e.preventDefault();
+          console.log('Form submit event triggered');
+          
+          // Validate the form first
+          const isValid = await form.trigger();
+          console.log('Form validation:', { isValid, errors: form.formState.errors });
+          
+          if (!isValid) {
+            console.log('Form validation failed');
+            return;
+          }
+
+          // Get the form values
+          const values = form.getValues();
+          console.log('Form values:', values);
+
+          // Submit the form
+          form.handleSubmit(onSubmit)(e);
+        }} 
+        className="space-y-8"
+      >
         <div className="flex items-center space-x-2 mb-4">
           <div className={`h-2 flex-1 rounded ${
             isDetailsComplete ? 'bg-blue-500' : 'bg-gray-200'
@@ -162,7 +195,14 @@ export function ProjectForm() {
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <FormLabel>Supporting Materials</FormLabel>
+                    <FormLabel>
+                      Supporting Materials
+                      {form.formState.errors.materials && (
+                        <span className="text-red-500 text-sm ml-2">
+                          {form.formState.errors.materials.message}
+                        </span>
+                      )}
+                    </FormLabel>
                     <Button type="button" variant="outline" onClick={addMaterial}>
                       Add Material
                     </Button>
@@ -263,18 +303,22 @@ export function ProjectForm() {
 
                   <FormField
                     control={form.control}
-                    name="maxSupply"
+                    name="targetRaise"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Maximum Supply</FormLabel>
+                        <FormLabel>Fundraising Target (USD)</FormLabel>
                         <FormControl>
                           <Input
                             type="number"
-                            min="0"
+                            min="1000"
+                            step="1000"
                             {...field}
                             onChange={e => field.onChange(Number(e.target.value))}
                           />
                         </FormControl>
+                        <FormDescription>
+                          This will create {maxSupply.toLocaleString()} credits
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}

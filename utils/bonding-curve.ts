@@ -109,3 +109,9 @@ export function calculateCurrentRaise(params: BondingCurveParams): number {
   // This calculates how much money has been raised so far
   return calculateCost(0, params.currentSupply, params);
 }
+
+export function calculateRequiredMaxSupply(targetRaise: number): number {
+  // For quadratic curve: totalRaise = maxSupply * (1/3)
+  // Therefore: maxSupply = targetRaise * 3
+  return targetRaise * 3;
+}

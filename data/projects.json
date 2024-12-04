@@ -45,6 +45,29 @@
       "launchDate": "2024-12-04",
       "status": "Active",
       "userId": "usr_1"
+    },
+    {
+      "id": "proj_4",
+      "name": "Fun coin",
+      "description": "FUND DUN DUN ",
+      "creditSymbol": "FUN",
+      "targetRaise": 20000,
+      "materials": [
+        {
+          "title": "Website",
+          "url": "http://localhost:3000/projects/new",
+          "type": "Website"
+        },
+        {
+          "title": "Cool",
+          "url": "http://localhost:3000/projects/new",
+          "type": "Video"
+        }
+      ],
+      "maxSupply": 60000,
+      "launchDate": "2024-12-04",
+      "status": "Active",
+      "userId": "usr_1"
     }
   ]
 }

@@ -5,6 +5,7 @@ import { ProjectCard } from "./project-card";
 import { Button } from "@/components/ui/button";
 import projectsData from "@/data/projects.json";
 import creditsData from "@/data/credits.json";
+import { calculatePrice, calculateCurrentRaise, calculateTotalRaise } from "@/utils/bonding-curve";
 
 interface Project {
   id: string;
@@ -12,16 +13,18 @@ interface Project {
   description: string;
   launchDate: string;
   status: "Active" | "Completed" | "Upcoming";
-  creditId?: string;
 }
 
 interface Credit {
   id: string;
   projectId: string;
+  symbol: string;
+  name: string;
   currentSupply: number;
   maxSupply: number;
   initialPrice: number;
   slope: number;
+  curveType: "quadratic" | "pump";
 }
 
 export function ProjectGrid() {
@@ -29,11 +32,14 @@ export function ProjectGrid() {
   const [projects, setProjects] = useState<(Project & { credit?: Credit })[]>([]);
 
   useEffect(() => {
-    // Simulate API call with our JSON data
     const loadProjects = () => {
       const projectsWithCredits = projectsData.projects.map(project => {
         const credit = creditsData.credits.find(c => c.projectId === project.id);
-        return { ...project, credit };
+        return {
+          ...project,
+          credit,
+          status: project.status as "Active" | "Completed" | "Upcoming"
+        };
       });
       setProjects(projectsWithCredits);
     };
@@ -41,11 +47,42 @@ export function ProjectGrid() {
     loadProjects();
   }, []);
 
-  const loadMore = async () => {
-    setIsLoading(true);
-    // TODO: Implement actual pagination logic
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsLoading(false);
+  const calculateProjectMetrics = (project: Project & { credit?: Credit }) => {
+    if (!project.credit) {
+      return {
+        tokenPrice: 0,
+        amountRaised: 0,
+        fundingGoal: 0
+      };
+    }
+
+    const currentPrice = calculatePrice(project.credit.currentSupply, {
+      maxSupply: project.credit.maxSupply,
+      initialPrice: project.credit.initialPrice,
+      slope: project.credit.slope,
+      curveType: project.credit.curveType
+    });
+
+    const amountRaised = calculateCurrentRaise({
+      currentSupply: project.credit.currentSupply,
+      maxSupply: project.credit.maxSupply,
+      initialPrice: project.credit.initialPrice,
+      slope: project.credit.slope,
+      curveType: project.credit.curveType
+    });
+
+    const fundingGoal = calculateTotalRaise({
+      maxSupply: project.credit.maxSupply,
+      initialPrice: project.credit.initialPrice,
+      slope: project.credit.slope,
+      curveType: project.credit.curveType
+    });
+
+    return {
+      tokenPrice: currentPrice,
+      amountRaised,
+      fundingGoal
+    };
   };
 
   if (projects.length === 0 && !isLoading) {
@@ -59,23 +96,20 @@ export function ProjectGrid() {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <ProjectCard 
-            key={project.id} 
-            project={{
-              ...project,
-              tokenPrice: project.credit ? 
-                project.credit.initialPrice + (project.credit.slope * project.credit.currentSupply) : 
-                0,
-              amountRaised: project.credit ? 
-                project.credit.currentSupply * (project.credit.initialPrice + (project.credit.slope * project.credit.currentSupply / 2)) : 
-                0,
-              fundingGoal: project.credit ? 
-                project.credit.maxSupply * (project.credit.initialPrice + (project.credit.slope * project.credit.maxSupply / 2)) : 
-                0
-            }} 
-          />
-        ))}
+        {projects.map((project) => {
+          const metrics = calculateProjectMetrics(project);
+          return (
+            <ProjectCard 
+              key={project.id} 
+              project={{
+                ...project,
+                tokenPrice: metrics.tokenPrice,
+                amountRaised: metrics.amountRaised,
+                fundingGoal: metrics.fundingGoal
+              }} 
+            />
+          );
+        })}
       </div>
       
       {isLoading && (
@@ -86,7 +120,11 @@ export function ProjectGrid() {
       
       <div className="flex justify-center pt-4">
         <Button
-          onClick={loadMore}
+          onClick={() => {
+            setIsLoading(true);
+            // TODO: Implement actual pagination logic
+            setTimeout(() => setIsLoading(false), 1000);
+          }}
           disabled={isLoading}
           variant="outline"
           size="lg"

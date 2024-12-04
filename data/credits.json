@@ -5,20 +5,9 @@
       "projectId": "proj_1",
       "symbol": "PION",
       "name": "Pioneer Credits",
-      "initialPrice": 0.1,
-      "slope": 0.00001,
-      "currentSupply": 450000,
-      "maxSupply": 1000000
-    },
-    {
-      "id": "cred_2",
-      "projectId": "proj_2",
-      "symbol": "DEFI",
-      "name": "DeFi Aggregator Credits",
-      "initialPrice": 0.2,
-      "slope": 0.00002,
-      "currentSupply": 750000,
-      "maxSupply": 2000000
+      "targetPrice": 1,
+      "currentSupply": 1000,
+      "maxSupply": 60000
     }
   ]
-} 
+}

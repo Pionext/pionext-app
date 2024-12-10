@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { UserCircle } from "lucide-react";
+import { CreditsDisplay } from "./navigation/credits-display";
 
 const projectLinks = [
   {
@@ -124,39 +125,42 @@ export function Navigation() {
 
         <div className="flex items-center space-x-4">
           {user ? (
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="flex items-center space-x-2">
-                    <UserCircle className="h-5 w-5" />
-                    <span>{user.name}</span>
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="w-[200px] p-2">
-                      <li>
-                        <Link href="/profile" legacyBehavior passHref>
-                          <NavigationMenuLink
-                            className={`block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
-                              pathname === "/profile" ? "bg-accent" : ""
-                            }`}
+            <>
+              <CreditsDisplay />
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="flex items-center space-x-2">
+                      <UserCircle className="h-5 w-5" />
+                      <span>{user.name}</span>
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="w-[200px] p-2">
+                        <li>
+                          <Link href="/profile" legacyBehavior passHref>
+                            <NavigationMenuLink
+                              className={`block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                                pathname === "/profile" ? "bg-accent" : ""
+                              }`}
+                            >
+                              Profile
+                            </NavigationMenuLink>
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => logout()}
+                            className="w-full text-left block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
-                            Profile
-                          </NavigationMenuLink>
-                        </Link>
-                      </li>
-                      <li>
-                        <button
-                          onClick={() => logout()}
-                          className="w-full text-left block select-none rounded-md p-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          Sign Out
-                        </button>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+                            Sign Out
+                          </button>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </>
           ) : (
             <>
               <Button variant="ghost" asChild>

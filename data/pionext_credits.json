@@ -4,6 +4,11 @@
       "userId": "usr_1",
       "balance": 1000,
       "lastUpdated": "2024-03-20T12:00:00Z"
+    },
+    {
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "balance": 140,
+      "lastUpdated": "2024-12-10T16:41:08.242Z"
     }
   ],
   "transactions": [
@@ -13,6 +18,34 @@
       "type": "purchase",
       "amount": 1000,
       "timestamp": "2024-03-20T12:00:00Z"
+    },
+    {
+      "id": "txn_1733848568882",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 100,
+      "timestamp": "2024-12-10T16:36:08.882Z"
+    },
+    {
+      "id": "txn_1733848602638",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 20,
+      "timestamp": "2024-12-10T16:36:42.638Z"
+    },
+    {
+      "id": "txn_1733848691938",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 10,
+      "timestamp": "2024-12-10T16:38:11.938Z"
+    },
+    {
+      "id": "txn_1733848868242",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 10,
+      "timestamp": "2024-12-10T16:41:08.242Z"
     }
   ]
-} 
+}

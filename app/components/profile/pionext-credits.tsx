@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/use-auth";
-import { usePionextCredits } from "@/hooks/use-pionext-credits";
+import { useCredits } from "@/contexts/credits-context";
 
 export function PionextCredits() {
   const { user } = useAuth();
-  const { balance, purchaseCredits, isLoading } = usePionextCredits();
+  const { balance, purchaseCredits, isLoading } = useCredits();
   const [amount, setAmount] = useState("");
   
   const handlePurchase = async () => {

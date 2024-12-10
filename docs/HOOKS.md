@@ -27,6 +27,25 @@ await register({ name: "User Name", email: "user@example.com", password: "passwo
 await logout();
 ```
 
+### useCredits
+- Location: `contexts/credits-context.tsx`
+- Purpose: Manages Pionext credits state and operations
+- Features:
+  - Credit balance tracking
+  - Credit purchase functionality
+  - Transaction history
+  - Real-time balance updates
+- Usage Example:
+```typescript
+const { balance, transactions, purchaseCredits, isLoading } = useCredits();
+
+// Purchase credits
+await purchaseCredits(100); // Purchase 100 PIONEXT credits
+
+// Access balance
+console.log(`Current balance: ${balance} PIONEXT`);
+```
+
 ### useCreateProject
 - Location: `hooks/use-create-project.ts`
 - Purpose: Manages project creation functionality
@@ -57,6 +76,9 @@ await logout();
 useAuth
     └─> (Independent)
 
+useCredits
+    └─> useAuth
+
 useCreateProject
     └─> useProject
            └─> useProjectCredits
@@ -67,6 +89,11 @@ useCreateProject
 ### Authentication
 ```typescript
 const { login, register, logout, user } = useAuth();
+```
+
+### Credits Management
+```typescript
+const { balance, purchaseCredits } = useCredits();
 ```
 
 ### Project Creation

@@ -30,6 +30,37 @@ This document describes the data structures and models used in the application.
 }
 ```
 
+## Platform Credits
+
+### Pionext Credits (`pionext_credits.json`)
+- Platform-wide credit system for purchasing project credits
+- Used for tracking user credit balances and transactions
+- Key data points:
+  - User balances
+  - Transaction history
+  - Purchase records
+- Example:
+```json
+{
+  "balances": [
+    {
+      "userId": "user123",
+      "balance": 1000,
+      "lastUpdated": "2024-03-20T12:00:00Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "txn_1",
+      "userId": "user123",
+      "type": "purchase",
+      "amount": 1000,
+      "timestamp": "2024-03-20T12:00:00Z"
+    }
+  ]
+}
+```
+
 ## Project Data
 
 ### Projects (`projects.json`)
@@ -70,6 +101,8 @@ This document describes the data structures and models used in the application.
 Projects <-> Credits <-> Credit Trades
     ↑           ↑
     └─── Users ─┴─> Credit Holdings
+         ↓
+    Pionext Credits
 ```
 
 ## Authentication Flow

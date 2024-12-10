@@ -31,6 +31,16 @@ This document provides an overview of the pages available in the application and
   - Link to login page
   - Loading states for form submission
 
+### Profile Page (`/profile`)
+- User profile and credits management
+- Located at: `app/profile/page.tsx`
+- Features:
+  - User account information
+  - PIONEXT credits balance display
+  - Credit purchase interface
+  - Transaction history
+  - Account settings
+
 ### Projects Page (`/projects`)
 - Overview of all available projects
 - Located at: `app/projects/page.tsx`
@@ -65,6 +75,8 @@ app/
 │   └── page.tsx (Login page)
 ├── register/
 │   └── page.tsx (Registration page)
+├── profile/
+│   └── page.tsx (User profile and credits management)
 ├── projects/
 │   ├── page.tsx (Projects listing with grid view)
 │   ├── new/ (New project creation interface)
@@ -83,6 +95,11 @@ app/
 - Login Form: Email and password authentication
 - Registration Form: New user account creation
 - Auth Error Display: Validation and error messaging
+
+### Profile Components
+- Account Info: User details and settings
+- PionextCredits: Credit balance and purchase interface
+- Navigation: Global credit balance display
 
 ### Projects Page Components
 - ProjectGrid: Display of all available projects

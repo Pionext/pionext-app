@@ -17,6 +17,23 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
   - Profile management
   - Protected routes
 
+## Platform Credits
+
+### PIONEXT Credits
+- Platform's native currency for investing in projects
+- Fixed 1:1 exchange rate with USD
+- Purchase through the profile page
+- Real-time balance updates
+- Transaction history tracking
+- Displayed in global navigation
+
+### Project Credits
+- Project-specific tokens for investment
+- Dynamic pricing through bonding curves
+- Purchase using PIONEXT credits
+- Early investor advantages
+- Liquid trading capabilities
+
 ## Current Implementation
 
 ### Authentication System
@@ -28,64 +45,36 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
 
 - **Protected Features**:
   - Project creation
-  - Investment actions
-  - Profile access
+  - Credit purchases
   - Trading operations
 
-### Project Management
-- Browse available projects
-- Create new projects
-- View project details
-- Trading interface (in development)
+### Credit Management
+- **PIONEXT Credits**:
+  - Purchase interface in profile
+  - Real-time balance updates
+  - Transaction history
+  - Global balance display
 
-## Technical Stack
-
-- **Frontend**:
-  - Next.js 14 (App Router)
-  - React with TypeScript
-  - Tailwind CSS for styling
-  - Shadcn UI components
-
-- **Backend**:
-  - Next.js API Routes
-  - File-based data storage (JSON)
-  - bcrypt for password hashing
-  - Session-based auth
-
-- **Development Tools**:
-  - TypeScript for type safety
-  - ESLint for code quality
-  - Prettier for code formatting
-
-## Project Structure
-
-```
-app/
-├── api/                 # API routes
-│   └── auth/           # Authentication endpoints
-├── components/         # Reusable components
-├── providers/          # Context providers
-├── hooks/             # Custom React hooks
-└── data/              # JSON data storage
-```
+- **Project Credits**:
+  - Bonding curve mechanics
+  - Trading interface
+  - Balance tracking
+  - Price calculations
 
 ## Getting Started
 
-1. **Installation**
-   ```bash
-   npm install
-   ```
-
-2. **Development**
-   ```bash
-   npm run dev
-   ```
-
-3. **Testing Authentication**
-   - Visit `/register` to create an account
-   - Visit `/login` to sign in
-   - Visit `/profile` to view your profile
-   - Protected routes require authentication
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+3. Start the development server:
+```bash
+npm run dev
+```
+4. Visit `/login` to sign in
+5. Visit `/profile` to manage credits
+6. Visit `/projects` to explore investment opportunities
 
 ## Trading Opportunities
 
@@ -138,6 +127,8 @@ Current limitations include:
 - [ ] User profile editing
 - [ ] Advanced session management
 - [ ] Role-based access control
+- [ ] Stripe integration for credit purchases
+- [ ] Credit withdrawal functionality
 
 ## Contributing
 

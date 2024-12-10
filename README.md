@@ -11,6 +11,81 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
   - Project-specific credits tradeable through bonding curves
   - Early investors benefit from discounted rates (up to 60% off)
   - Example: Pay 40 PIONEXT ($40) for 100 credits ($100 value)
+- **User Authentication**:
+  - Secure email/password authentication
+  - Session persistence
+  - Profile management
+  - Protected routes
+
+## Current Implementation
+
+### Authentication System
+- **User Management**:
+  - Registration with email/password
+  - Secure password hashing with bcrypt
+  - Session-based authentication
+  - Profile viewing and management
+
+- **Protected Features**:
+  - Project creation
+  - Investment actions
+  - Profile access
+  - Trading operations
+
+### Project Management
+- Browse available projects
+- Create new projects
+- View project details
+- Trading interface (in development)
+
+## Technical Stack
+
+- **Frontend**:
+  - Next.js 14 (App Router)
+  - React with TypeScript
+  - Tailwind CSS for styling
+  - Shadcn UI components
+
+- **Backend**:
+  - Next.js API Routes
+  - File-based data storage (JSON)
+  - bcrypt for password hashing
+  - Session-based auth
+
+- **Development Tools**:
+  - TypeScript for type safety
+  - ESLint for code quality
+  - Prettier for code formatting
+
+## Project Structure
+
+```
+app/
+├── api/                 # API routes
+│   └── auth/           # Authentication endpoints
+├── components/         # Reusable components
+├── providers/          # Context providers
+├── hooks/             # Custom React hooks
+└── data/              # JSON data storage
+```
+
+## Getting Started
+
+1. **Installation**
+   ```bash
+   npm install
+   ```
+
+2. **Development**
+   ```bash
+   npm run dev
+   ```
+
+3. **Testing Authentication**
+   - Visit `/register` to create an account
+   - Visit `/login` to sign in
+   - Visit `/profile` to view your profile
+   - Protected routes require authentication
 
 ## Trading Opportunities
 
@@ -46,13 +121,6 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
    - Early investors benefit from lower initial prices
    - Credits can be traded anytime through the platform
 
-## Technical Stack (MVP)
-
-- Centralized architecture (non-blockchain)
-- Data mirroring to Internet Computer Protocol (ICP)
-- Standardized bonding curve implementation
-- Database-managed credit system
-
 ## Platform Limitations (MVP)
 
 Current limitations include:
@@ -62,27 +130,22 @@ Current limitations include:
 - Simplified token economics
 - Basic user profiles
 
-## Project Verification
+## Upcoming Features
 
-- Projects must apply for listing
-- Manual review process by PIONEXT team
-- Feedback provided for rejected projects
-- Future feature: AI-powered preliminary screening
+- [ ] Enhanced authentication with OAuth providers
+- [ ] Email verification
+- [ ] Password reset functionality
+- [ ] User profile editing
+- [ ] Advanced session management
+- [ ] Role-based access control
 
-## Investment Mechanics
+## Contributing
 
-- Project app credit prices follow bonding curve formula
-- Initial price set at project launch
-- Price increases as more credits are purchased
-- Price decreases when credits are sold back
-- Early investors benefit from:
-  - Lower initial app credit prices
-  - Potential price appreciation
-  - First access to promising projects
-
-## Development
-
-[Add development setup instructions, dependencies, and contribution guidelines here]
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 

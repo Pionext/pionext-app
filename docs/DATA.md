@@ -1,0 +1,83 @@
+# Data Models Documentation
+
+This document describes the data structures and models used in the application.
+
+## Authentication Data
+
+### Users (`auth.json`)
+- Contains user authentication and profile information
+- Used for user management and session handling
+- Key data points:
+  - User ID (unique identifier)
+  - Email (unique)
+  - Password hash (bcrypt)
+  - Name
+  - Created timestamp
+  - Last login timestamp
+- Example:
+```json
+{
+  "users": [
+    {
+      "id": "user123",
+      "email": "user@example.com",
+      "passwordHash": "$2b$10$...",
+      "name": "User Name",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": "2024-01-02T00:00:00Z"
+    }
+  ]
+}
+```
+
+## Project Data
+
+### Projects (`projects.json`)
+- Contains project information and metadata
+- Used for displaying project listings and details
+- Key data points:
+  - Project details
+  - Project metadata
+  - Project status
+
+### Credits (`credits.json`)
+- Credit-related information
+- Used for managing project credits and trading
+- Key data points:
+  - Credit types
+  - Credit values
+  - Credit metadata
+
+### Credit Trades (`credit_trades.json`)
+- Trading history and transactions
+- Used for tracking credit exchanges
+- Key data points:
+  - Trade history
+  - Transaction details
+  - Trading metrics
+
+### Credit Holdings (`credit_holdings.json`)
+- Current credit ownership data
+- Used for tracking credit ownership
+- Key data points:
+  - Current holdings
+  - Ownership records
+  - Balance information
+
+## Data Flow
+
+```
+Projects <-> Credits <-> Credit Trades
+    ↑           ↑
+    └─── Users ─┴─> Credit Holdings
+```
+
+## Authentication Flow
+
+```
+Login/Register -> User Created/Updated -> Session Created
+       ↑                                      ↓
+       └──────────── Session Check ──────────┘
+```
+
+Note: This documentation should be updated as data models evolve or new data structures are added.

@@ -1,0 +1,18 @@
+{
+  "balances": [
+    {
+      "userId": "usr_1",
+      "balance": 1000,
+      "lastUpdated": "2024-03-20T12:00:00Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "txn_1",
+      "userId": "usr_1",
+      "type": "purchase",
+      "amount": 1000,
+      "timestamp": "2024-03-20T12:00:00Z"
+    }
+  ]
+} 

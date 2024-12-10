@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Navigation } from './components/navigation'
 import { Crimson_Text } from 'next/font/google'
+import { AuthProvider } from './providers/auth-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 const crimsonText = Crimson_Text({ 
@@ -67,15 +68,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={crimsonText.className}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="en">
       <body className={inter.className}>
-        <Navigation />
-        {children}
+        <AuthProvider>
+          <Navigation />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

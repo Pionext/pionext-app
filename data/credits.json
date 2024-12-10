@@ -6,23 +6,32 @@
       "symbol": "PION",
       "name": "Pioneer Credits",
       "targetPrice": 1,
-      "currentSupply": 1000,
+      "currentSupply": 50000,
       "maxSupply": 60000
     },
     {
       "id": "cred_2",
-      "projectId": "proj_3",
-      "symbol": "FUN ",
-      "name": "Fun COin Credits",
+      "projectId": "proj_2",
+      "symbol": "DEFA",
+      "name": "Defa Credits",
       "targetPrice": 1,
-      "currentSupply": 0,
-      "maxSupply": 10000
+      "currentSupply": 10000,
+      "maxSupply": 20000
     },
     {
       "id": "cred_3",
-      "projectId": "proj_4",
+      "projectId": "proj_3",
       "symbol": "FUN",
       "name": "Fun coin Credits",
+      "targetPrice": 1,
+      "currentSupply": 2000,
+      "maxSupply": 60000
+    },
+    {
+      "id": "cred_4",
+      "projectId": "proj_4",
+      "symbol": "HELA",
+      "name": "AI Health Assistant Credits",
       "targetPrice": 1,
       "currentSupply": 0,
       "maxSupply": 60000

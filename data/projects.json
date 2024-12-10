@@ -37,17 +37,6 @@
     },
     {
       "id": "proj_3",
-      "name": "Fun COin",
-      "description": "col col col col ",
-      "maxSupply": 10000,
-      "initialPrice": 1,
-      "materials": [],
-      "launchDate": "2024-12-04",
-      "status": "Active",
-      "userId": "usr_1"
-    },
-    {
-      "id": "proj_4",
       "name": "Fun coin",
       "description": "FUND DUN DUN ",
       "creditSymbol": "FUN",
@@ -62,6 +51,24 @@
           "title": "Cool",
           "url": "http://localhost:3000/projects/new",
           "type": "Video"
+        }
+      ],
+      "maxSupply": 60000,
+      "launchDate": "2024-12-04",
+      "status": "Active",
+      "userId": "usr_1"
+    },
+    {
+      "id": "proj_4",
+      "name": "AI Health Assistant",
+      "description": "Do great health stuff",
+      "creditSymbol": "HELA",
+      "targetRaise": 20000,
+      "materials": [
+        {
+          "title": "Cool",
+          "url": "http://localhost:3000/projects/new",
+          "type": "Website"
         }
       ],
       "maxSupply": 60000,

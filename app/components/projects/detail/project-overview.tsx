@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useProjectCredits } from "@/hooks/use-project-credits";
+import { calculatePrice, calculateCurrentRaise, calculateTotalRaise } from "@/utils/bonding-curve";
 
 interface ProjectOverviewProps {
   projectId: string;
@@ -16,9 +17,9 @@ export function ProjectOverview({ projectId, description }: ProjectOverviewProps
     return null;
   }
 
-  const currentPrice = credits.initialPrice + (credits.slope * credits.currentSupply);
-  const amountRaised = credits.currentSupply * (credits.initialPrice + (credits.slope * credits.currentSupply / 2));
-  const fundingGoal = credits.maxSupply * (credits.initialPrice + (credits.slope * credits.maxSupply / 2));
+  const currentPrice = calculatePrice(credits.currentSupply, credits);
+  const amountRaised = calculateCurrentRaise(credits);
+  const fundingGoal = calculateTotalRaise(credits);
   const progress = (amountRaised / fundingGoal) * 100;
 
   return (

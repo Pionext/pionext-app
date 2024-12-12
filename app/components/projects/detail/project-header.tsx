@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { useProjectCredits } from "@/hooks/use-project-credits";
+import { calculatePrice } from "@/utils/bonding-curve";
 
 interface ProjectHeaderProps {
   projectId: string;
@@ -12,9 +13,7 @@ interface ProjectHeaderProps {
 
 export function ProjectHeader({ projectId, name, launchDate, status }: ProjectHeaderProps) {
   const { credits } = useProjectCredits(projectId);
-  const currentPrice = credits ? 
-    credits.initialPrice + (credits.slope * credits.currentSupply) : 
-    0;
+  const currentPrice = credits ? calculatePrice(credits.currentSupply, credits) : 0;
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

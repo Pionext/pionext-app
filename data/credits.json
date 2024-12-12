@@ -6,7 +6,7 @@
       "symbol": "PION",
       "name": "Pioneer Credits",
       "targetPrice": 1,
-      "currentSupply": 50000,
+      "currentSupply": 50200,
       "maxSupply": 60000
     },
     {
@@ -24,7 +24,7 @@
       "symbol": "FUN",
       "name": "Fun coin Credits",
       "targetPrice": 1,
-      "currentSupply": 2000,
+      "currentSupply": 7000,
       "maxSupply": 60000
     },
     {

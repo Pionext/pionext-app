@@ -15,12 +15,12 @@ export async function POST(request: Request) {
 
     console.log('Login attempt for email:', email)
 
-    // Read users from auth.json
-    const authFilePath = path.join(process.cwd(), 'data', 'auth.json')
-    const authData = JSON.parse(fs.readFileSync(authFilePath, 'utf-8'))
+    // Read users from users.json
+    const usersFilePath = path.join(process.cwd(), 'data', 'users.json')
+    const userData = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'))
     
     // Find user
-    const user = authData.users.find((u: any) => u.email === email)
+    const user = userData.users.find((u: any) => u.email === email)
     if (!user) {
       console.log('User not found:', email)
       return NextResponse.json(
@@ -42,11 +42,7 @@ export async function POST(request: Request) {
       )
     }
 
-    // Update last login
-    user.lastLogin = new Date().toISOString()
-    fs.writeFileSync(authFilePath, JSON.stringify(authData, null, 2))
-
-    // Return user data (excluding password)
+    // Return user data (excluding sensitive information)
     const { passwordHash, ...userWithoutPassword } = user
     return NextResponse.json(userWithoutPassword)
   } catch (error) {

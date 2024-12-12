@@ -7,7 +7,10 @@ interface User {
   id: string
   email: string
   name: string
-  createdAt: string
+  username: string
+  bio: string | null
+  role: 'user' | 'builder'
+  joinedAt: string
 }
 
 interface AuthState {

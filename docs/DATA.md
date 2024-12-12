@@ -2,18 +2,20 @@
 
 This document describes the data structures and models used in the application.
 
-## Authentication Data
+## User Data
 
-### Users (`auth.json`)
+### Users (`users.json`)
 - Contains user authentication and profile information
-- Used for user management and session handling
+- Used for user management, authentication, and profile data
 - Key data points:
   - User ID (unique identifier)
   - Email (unique)
   - Password hash (bcrypt)
+  - Username
   - Name
-  - Created timestamp
-  - Last login timestamp
+  - Bio
+  - Role (user/builder)
+  - Joined timestamp
 - Example:
 ```json
 {
@@ -22,9 +24,11 @@ This document describes the data structures and models used in the application.
       "id": "user123",
       "email": "user@example.com",
       "passwordHash": "$2b$10$...",
-      "name": "User Name",
-      "createdAt": "2024-01-01T00:00:00Z",
-      "lastLogin": "2024-01-02T00:00:00Z"
+      "username": "johndoe",
+      "name": "John Doe",
+      "bio": "Experienced developer...",
+      "role": "builder",
+      "joinedAt": "2024-01-01T00:00:00Z"
     }
   ]
 }

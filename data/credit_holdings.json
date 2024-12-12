@@ -13,6 +13,48 @@
       "userId": "usr_2",
       "balance": 2000,
       "lastUpdated": "2024-03-20T12:00:00Z"
+    },
+    {
+      "id": "hold_1733999170947",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "balance": 100,
+      "lastUpdated": "2024-12-12T11:12:48.448Z"
+    },
+    {
+      "id": "hold_1733999755689",
+      "creditId": "cred_4",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "balance": 0,
+      "lastUpdated": "2024-12-12T15:25:32.175Z"
+    },
+    {
+      "id": "hold_1734002030242",
+      "creditId": "cred_1",
+      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+      "balance": 100,
+      "lastUpdated": "2024-12-12T11:13:50.242Z"
+    },
+    {
+      "id": "hold_1734012784456",
+      "creditId": "cred_3",
+      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+      "balance": 0,
+      "lastUpdated": "2024-12-12T14:22:20.032Z"
+    },
+    {
+      "id": "hold_1734013113935",
+      "creditId": "cred_3",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "balance": 5000,
+      "lastUpdated": "2024-12-12T14:18:33.935Z"
+    },
+    {
+      "id": "hold_1734016662381",
+      "creditId": "cred_4",
+      "userId": "372752ac-58b5-4816-9cef-482a7a440a9e",
+      "balance": 0,
+      "lastUpdated": "2024-12-12T15:26:54.355Z"
     }
   ]
-} 
+}

@@ -7,23 +7,41 @@ export async function POST(req: Request) {
     const data = await req.json();
     const projectsPath = path.join(process.cwd(), 'data', 'projects.json');
     const creditsPath = path.join(process.cwd(), 'data', 'credits.json');
+    const usersPath = path.join(process.cwd(), 'data', 'users.json');
     
-    // Read existing projects and credits
-    const [projectsContent, creditsContent] = await Promise.all([
+    // Read existing projects, credits, and get current user
+    const [projectsContent, creditsContent, usersContent] = await Promise.all([
       fs.readFile(projectsPath, 'utf-8'),
-      fs.readFile(creditsPath, 'utf-8')
+      fs.readFile(creditsPath, 'utf-8'),
+      fs.readFile(usersPath, 'utf-8')
     ]);
     
     const projectsData = JSON.parse(projectsContent);
     const creditsData = JSON.parse(creditsContent);
+    const usersData = JSON.parse(usersContent);
+
+    // Get the current user (most recently logged in)
+    const currentUser = usersData.users.reduce((latest: any, current: any) => {
+      if (!latest || new Date(current.joinedAt) > new Date(latest.joinedAt)) {
+        return current;
+      }
+      return latest;
+    }, null);
+
+    if (!currentUser) {
+      return NextResponse.json(
+        { error: 'No authenticated user found' },
+        { status: 401 }
+      );
+    }
     
-    // Create new project
+    // Create new project with the current user's ID
     const newProject = {
       id: `proj_${projectsData.projects.length + 1}`,
       ...data,
       launchDate: new Date().toISOString().split('T')[0],
       status: "Active",
-      userId: "usr_1",
+      userId: currentUser.id,
     };
     
     // Create associated credits

@@ -1,19 +1,21 @@
 {
   "users": [
     {
-      "id": "usr_1",
+      "id": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "email": "do@test.org",
+      "passwordHash": "$2b$10$lOxe/GlfMkzlBfuSoVbEz.qKUeijtNmNPUItCGDKQU5Zt9jUePA8q",
       "username": "johndoe",
       "name": "John Doe",
-      "email": "john@example.com",
       "bio": "Experienced blockchain developer and entrepreneur with a passion for decentralized finance. Previously built successful DeFi protocols and Web3 applications.",
       "role": "builder",
-      "joinedAt": "2024-01-15T00:00:00Z"
+      "joinedAt": "2024-12-10T15:53:03.459Z"
     },
     {
-      "id": "usr_2",
+      "id": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+      "email": "jdo@test.org",
+      "passwordHash": "$2b$10$lOxe/GlfMkzlBfuSoVbEz.qKUeijtNmNPUItCGDKQU5Zt9jUePA8q",
       "username": "janesmith",
       "name": "Jane Smith",
-      "email": "jane@example.com",
       "bio": "Full-stack developer specializing in DeFi protocols and cross-chain bridges. Previously led development at major crypto projects.",
       "role": "builder",
       "joinedAt": "2024-01-20T00:00:00Z"
@@ -23,6 +25,7 @@
       "username": "alice",
       "name": "Alice Wilson",
       "email": "alice@example.com",
+      "bio": null,
       "role": "user",
       "joinedAt": "2024-02-01T00:00:00Z"
     },
@@ -31,8 +34,19 @@
       "username": "bob",
       "name": "Bob Johnson",
       "email": "bob@example.com",
+      "bio": null,
       "role": "user",
       "joinedAt": "2024-02-15T00:00:00Z"
+    },
+    {
+      "id": "372752ac-58b5-4816-9cef-482a7a440a9e",
+      "email": "alice@test.de",
+      "passwordHash": "$2b$10$QguSaM9Dq0CSm63ZipNv3uYvpiIw0d5Qbeb2yvCziQITfTkEmmkRK",
+      "username": "alice",
+      "name": "Alice Doe",
+      "bio": null,
+      "role": "user",
+      "joinedAt": "2024-12-12T15:16:42.859Z"
     }
   ]
-} 
+}

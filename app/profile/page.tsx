@@ -46,7 +46,7 @@ export default function ProfilePage() {
               <div>
                 <label className="text-sm font-medium text-gray-500">Member Since</label>
                 <p className="text-lg">
-                  {new Date(user.createdAt).toLocaleDateString()}
+                  {new Date(user.joinedAt).toLocaleDateString()}
                 </p>
               </div>
             </CardContent>

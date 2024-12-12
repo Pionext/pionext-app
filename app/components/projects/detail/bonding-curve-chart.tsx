@@ -18,7 +18,11 @@ import { getBondingCurvePoints, calculatePrice } from "@/utils/bonding-curve";
 const chartConfig = {
   price: {
     label: "Price",
-    color: "hsl(var(--chart-1))",
+    color: "#0000FF",
+    theme: {
+      light: "#E8F4FF",  // Clearer light blue color
+      dark: "#0000FF",   // Regular blue for dark theme
+    }
   },
 } satisfies ChartConfig;
 
@@ -105,9 +109,10 @@ export function BondingCurveChart({ credit }: BondingCurveChartProps) {
             <Area
               dataKey="price"
               type="monotone"
-              fill="var(--color-price)"
-              fillOpacity={0.4}
-              stroke="var(--color-price)"
+              fill="#E8F4FF"
+              fillOpacity={0.6}
+              stroke="#0000FF"
+              strokeWidth={2}
             />
             <ReferenceLine
               x={credit.currentSupply}

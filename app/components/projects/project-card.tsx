@@ -27,7 +27,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Active":
-        return "bg-green-500";
+        return "bg-[#0000FF]";
       case "Completed":
         return "bg-blue-500";
       case "Upcoming":

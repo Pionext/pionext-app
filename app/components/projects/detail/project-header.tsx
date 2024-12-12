@@ -3,6 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { useProjectCredits } from "@/hooks/use-project-credits";
 import { calculatePrice } from "@/utils/bonding-curve";
+import { cn } from "@/lib/utils";
 
 interface ProjectHeaderProps {
   projectId: string;
@@ -32,7 +33,10 @@ export function ProjectHeader({ projectId, name, launchDate, status }: ProjectHe
       </div>
       <Badge 
         variant={status === "Active" ? "default" : "secondary"}
-        className="w-fit"
+        className={cn(
+          "w-fit",
+          status === "Active" && "bg-[#0000FF] hover:bg-[#0000FF]/80"
+        )}
       >
         {status}
       </Badge>

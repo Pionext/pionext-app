@@ -13,6 +13,7 @@ interface Transaction {
 
 interface CreditsContextType {
   balance: number;
+  setBalance: (balance: number) => void;
   transactions: Transaction[];
   isLoading: boolean;
   purchaseCredits: (amount: number) => Promise<Transaction>;
@@ -81,6 +82,7 @@ export function CreditsProvider({ children }: { children: ReactNode }) {
   return (
     <CreditsContext.Provider value={{
       balance,
+      setBalance,
       transactions,
       isLoading,
       purchaseCredits

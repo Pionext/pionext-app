@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/use-auth';
+import { useCredits } from '@/contexts/credits-context';
 import creditsData from '@/data/credits.json';
 import holdingsData from '@/data/credit_holdings.json';
 
@@ -36,6 +37,7 @@ interface Trade {
 
 export function useProjectCredits(projectId: string) {
   const { user } = useAuth();
+  const { setBalance } = useCredits();
   const [credits, setCredits] = useState<Credit | null>(null);
   const [holding, setHolding] = useState<CreditHolding | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,10 +80,11 @@ export function useProjectCredits(projectId: string) {
         throw new Error(error.message || 'Failed to trade credits');
       }
 
-      const { trade, holding: newHolding, credit: updatedCredit } = await response.json();
+      const { trade, holding: newHolding, credit: updatedCredit, pionextBalance } = await response.json();
       
       setCredits(updatedCredit);
       setHolding(newHolding);
+      setBalance(pionextBalance);
 
       return trade;
     } catch (error) {

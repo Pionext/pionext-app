@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { PionextCredits } from "../components/profile/pionext-credits";
+import { ProjectCredits } from "../components/profile/project-credits";
 
 export default function ProfilePage() {
   const { user, isLoading, logout } = useAuth();
@@ -52,6 +53,8 @@ export default function ProfilePage() {
           </Card>
 
           <PionextCredits />
+          
+          <ProjectCredits />
 
           <div className="flex justify-end">
             <Button 

@@ -38,12 +38,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main content - 2 columns */}
           <div className="lg:col-span-2 space-y-8">
-            <TradingSection projectId={project.id} />
             <ProjectOverview 
               projectId={project.id}
               description={project.description}
             />
             <SupportingMaterials materials={project.materials} />
+            <TradingSection projectId={project.id} />
           </div>
           
           {/* Sidebar - 1 column */}

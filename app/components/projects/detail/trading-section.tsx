@@ -116,7 +116,7 @@ export function TradingSection({ projectId }: TradingSectionProps) {
               <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
                 <div className="flex justify-between text-sm">
                   <span>Average Price</span>
-                  <span>${simulation.averagePrice.toFixed(4)}</span>
+                  <span>${isNaN(simulation.averagePrice) ? '0.0000' : simulation.averagePrice.toFixed(4)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Price Impact</span>

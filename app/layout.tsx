@@ -37,7 +37,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Navigation />
-          {children}
+          <main className="pt-[57px]">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

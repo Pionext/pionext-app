@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useProjectCredits } from "@/hooks/use-project-credits";
-import { calculatePrice, calculateCurrentRaise, calculateTotalRaise } from "@/utils/bonding-curve";
+import { calculateCurrentRaise, calculateTotalRaise } from "@/utils/bonding-curve";
 
 interface ProjectOverviewProps {
   projectId: string;
@@ -17,7 +17,6 @@ export function ProjectOverview({ projectId, description }: ProjectOverviewProps
     return null;
   }
 
-  const currentPrice = calculatePrice(credits.currentSupply, credits);
   const amountRaised = calculateCurrentRaise(credits);
   const fundingGoal = calculateTotalRaise(credits);
   const progress = (amountRaised / fundingGoal) * 100;
@@ -49,25 +48,6 @@ export function ProjectOverview({ projectId, description }: ProjectOverviewProps
               </span>
             </div>
             <Progress value={progress} className="h-2" />
-          </div>
-        </div>
-
-        {/* Token Stats */}
-        <div>
-          <h3 className="font-semibold mb-4">Credit Information</h3>
-          <div className="space-y-4">
-            <div className="flex justify-between">
-              <span className="text-gray-500">Current Price</span>
-              <span className="font-medium">${currentPrice.toFixed(4)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">Total Credits</span>
-              <span className="font-medium">{credits.maxSupply.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">Credits Issued</span>
-              <span className="font-medium">{credits.currentSupply.toLocaleString()}</span>
-            </div>
           </div>
         </div>
       </CardContent>

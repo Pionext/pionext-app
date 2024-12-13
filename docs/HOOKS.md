@@ -50,20 +50,13 @@ console.log(`Current balance: ${balance} PIONEXT`);
 - Location: `hooks/use-pionext-credits.ts`
 - Purpose: Manages Pionext credits balance and transactions
 - Features:
-  - Fetches and tracks user credit balance
+  - Fetches and tracks user credit balance from `pionext_balances.json`
   - Handles credit purchases
-  - Maintains transaction history
+  - Maintains transaction history in `pionext_transactions.json`
   - Real-time balance updates
 - Usage Example:
 ```typescript
 const { balance, transactions, purchaseCredits, isLoading } = usePionextCredits();
-
-// Purchase credits
-await purchaseCredits(100); // Purchase 100 credits
-
-// Access balance and transactions
-console.log(`Current balance: ${balance}`);
-console.log('Recent transactions:', transactions);
 ```
 
 ### useCreateProject
@@ -86,9 +79,14 @@ console.log('Recent transactions:', transactions);
 - Location: `hooks/use-project-credits.ts`
 - Purpose: Handles project-specific credit operations
 - Features:
-  - Credit data management
-  - Credit-related calculations
-  - Credit state updates
+  - Credit data management using `credit_balances.json`
+  - Trading functionality
+  - Balance tracking
+  - Transaction history from `credit_transactions.json`
+- Usage Example:
+```typescript
+const { credits, holding, tradeCredits } = useProjectCredits(projectId);
+```
 
 ## Hook Dependencies
 

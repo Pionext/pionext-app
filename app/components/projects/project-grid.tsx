@@ -22,9 +22,7 @@ interface Credit {
   name: string;
   currentSupply: number;
   maxSupply: number;
-  initialPrice: number;
-  slope: number;
-  curveType: "quadratic" | "pump";
+  targetPrice: number;
 }
 
 export function ProjectGrid() {
@@ -57,25 +55,18 @@ export function ProjectGrid() {
     }
 
     const currentPrice = calculatePrice(project.credit.currentSupply, {
-      maxSupply: project.credit.maxSupply,
-      initialPrice: project.credit.initialPrice,
-      slope: project.credit.slope,
-      curveType: project.credit.curveType
+      currentSupply: project.credit.currentSupply,
+      maxSupply: project.credit.maxSupply
     });
 
     const amountRaised = calculateCurrentRaise({
       currentSupply: project.credit.currentSupply,
-      maxSupply: project.credit.maxSupply,
-      initialPrice: project.credit.initialPrice,
-      slope: project.credit.slope,
-      curveType: project.credit.curveType
+      maxSupply: project.credit.maxSupply
     });
 
     const fundingGoal = calculateTotalRaise({
-      maxSupply: project.credit.maxSupply,
-      initialPrice: project.credit.initialPrice,
-      slope: project.credit.slope,
-      curveType: project.credit.curveType
+      currentSupply: 0,
+      maxSupply: project.credit.maxSupply
     });
 
     return {

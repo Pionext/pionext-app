@@ -14,7 +14,6 @@ interface Credit {
   targetPrice: number;
   currentSupply: number;
   maxSupply: number;
-  curveType: 'quadratic' | 'pump';
 }
 
 interface CreditHolding {

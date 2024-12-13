@@ -23,16 +23,17 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
 - Platform's native currency for investing in projects
 - Fixed 1:1 exchange rate with USD
 - Purchase through the profile page
-- Real-time balance updates
-- Transaction history tracking
+- Balances stored in `pionext_balances.json`
+- Transactions tracked in `pionext_transactions.json`
 - Displayed in global navigation
 
 ### Project Credits
 - Project-specific tokens for investment
-- Dynamic pricing through bonding curves
+- Quadratic bonding curve for price discovery
 - Purchase using PIONEXT credits
 - Early investor advantages
-- Liquid trading capabilities
+- Balances stored in `credit_balances.json`
+- Trading history in `credit_transactions.json`
 
 ## Current Implementation
 
@@ -51,15 +52,15 @@ PIONEXT is a hybrid investment platform combining crowdfunding mechanics with au
 ### Credit Management
 - **PIONEXT Credits**:
   - Purchase interface in profile
+  - Separate balance and transaction tracking
   - Real-time balance updates
-  - Transaction history
   - Global balance display
 
 - **Project Credits**:
-  - Bonding curve mechanics
+  - Quadratic bonding curve mechanics
   - Trading interface
-  - Balance tracking
-  - Price calculations
+  - Balance and transaction separation
+  - Automated price calculations
 
 ## Getting Started
 

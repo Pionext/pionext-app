@@ -21,8 +21,8 @@ export function ProjectCredits() {
     if (!credit) return null;
 
     const currentPrice = calculatePrice(credit.currentSupply, {
-      ...credit,
-      curveType: credit.curveType as 'quadratic' | 'pump'
+      currentSupply: credit.currentSupply,
+      maxSupply: credit.maxSupply
     });
 
     return {
@@ -30,7 +30,7 @@ export function ProjectCredits() {
       credit,
       currentPrice
     };
-  }).filter(Boolean);
+  }).filter((holding): holding is NonNullable<typeof holding> => holding !== null);
 
   if (holdingsWithCredits.length === 0) {
     return null;

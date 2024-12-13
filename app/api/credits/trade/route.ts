@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
-import { simulatePurchase, simulateSale } from '@/utils/bonding-curve';
+import { simulatePurchase, simulateSale, PurchaseResult, SaleResult } from '@/utils/bonding-curve';
 
 interface TradeRequest {
   userId: string;
@@ -49,7 +49,8 @@ export async function POST(request: Request) {
 
     // Check if user has enough balance
     if (type === 'buy') {
-      if (pionextBalance < simulation.cost) {
+      const purchaseSimulation = simulation as PurchaseResult;
+      if (pionextBalance < purchaseSimulation.cost) {
         return NextResponse.json({ error: 'Insufficient PIONEXT balance' }, { status: 400 });
       }
     } else {
@@ -66,9 +67,11 @@ export async function POST(request: Request) {
     // Update user's PIONEXT balance
     const pionextBalanceRecord = balancesData.balances.find((b: any) => b.userId === userId);
     if (type === 'buy') {
-      pionextBalanceRecord.balance -= simulation.cost;
+      const purchaseSimulation = simulation as PurchaseResult;
+      pionextBalanceRecord.balance -= purchaseSimulation.cost;
     } else {
-      pionextBalanceRecord.balance += simulation.proceeds;
+      const saleSimulation = simulation as SaleResult;
+      pionextBalanceRecord.balance += saleSimulation.proceeds;
     }
     pionextBalanceRecord.lastUpdated = new Date().toISOString();
 

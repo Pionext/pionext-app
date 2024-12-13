@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { useProjectCredits } from "@/hooks/use-project-credits";
 import { usePionextCredits } from "@/contexts/pionext-credits-context";
 import { 
-  getBondingCurvePoints, 
   simulatePurchase, 
   simulateSale,
   calculatePrice,
@@ -38,8 +37,8 @@ export function TradingSection({ projectId }: TradingSectionProps) {
   if (!credits) return null;
 
   const currentPrice = calculatePrice(credits.currentSupply, {
-    ...credits,
-    curveType: credits.curveType as 'quadratic' | 'pump'
+    currentSupply: credits.currentSupply,
+    maxSupply: credits.maxSupply
   });
 
   // Calculate simulation results
@@ -94,11 +93,8 @@ export function TradingSection({ projectId }: TradingSectionProps) {
           <BondingCurveChart credit={{
             symbol: credits.symbol,
             name: credits.name,
-            initialPrice: credits.initialPrice,
-            targetPrice: credits.targetPrice,
             currentSupply: credits.currentSupply,
-            maxSupply: credits.maxSupply,
-            curveType: credits.curveType as 'quadratic' | 'pump'
+            maxSupply: credits.maxSupply
           }} />
 
           {/* Trading Interface */}

@@ -314,6 +314,87 @@
       "amount": 100,
       "price": 0.7098064814815119,
       "timestamp": "2024-12-13T14:19:20.654Z"
+    },
+    {
+      "id": "trd_1734100730775",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.712617592592535,
+      "timestamp": "2024-12-13T14:38:50.775Z"
+    },
+    {
+      "id": "trd_1734100743463",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.7154342592592733,
+      "timestamp": "2024-12-13T14:39:03.463Z"
+    },
+    {
+      "id": "trd_1734100829913",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.718256481481494,
+      "timestamp": "2024-12-13T14:40:29.913Z"
+    },
+    {
+      "id": "trd_1734100837745",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.7210842592592303,
+      "timestamp": "2024-12-13T14:40:37.745Z"
+    },
+    {
+      "id": "trd_1734100842826",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.7239175925926322,
+      "timestamp": "2024-12-13T14:40:42.826Z"
+    },
+    {
+      "id": "trd_1734101076291",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "sell",
+      "amount": 200,
+      "price": 0.7225009259259313,
+      "timestamp": "2024-12-13T14:44:36.291Z"
+    },
+    {
+      "id": "trd_1734101178069",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 100,
+      "price": 0.7210842592592303,
+      "timestamp": "2024-12-13T14:46:18.069Z"
+    },
+    {
+      "id": "trd_1734101185119",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "sell",
+      "amount": 100,
+      "price": 0.7210842592592303,
+      "timestamp": "2024-12-13T14:46:25.119Z"
+    },
+    {
+      "id": "trd_1734101213058",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "sell",
+      "amount": 100,
+      "price": 0.718256481481494,
+      "timestamp": "2024-12-13T14:46:53.058Z"
     }
   ]
 }

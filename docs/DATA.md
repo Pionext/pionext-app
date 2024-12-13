@@ -36,13 +36,12 @@ This document describes the data structures and models used in the application.
 
 ## Platform Credits
 
-### Pionext Credits (`pionext_credits.json`)
-- Platform-wide credit system for purchasing project credits
-- Used for tracking user credit balances and transactions
+### Pionext Balances (`pionext_balances.json`)
+- Platform-wide credit balances for purchasing project credits
+- Used for tracking user credit balances
 - Key data points:
   - User balances
-  - Transaction history
-  - Purchase records
+  - Last update timestamps
 - Example:
 ```json
 {
@@ -52,7 +51,19 @@ This document describes the data structures and models used in the application.
       "balance": 1000,
       "lastUpdated": "2024-03-20T12:00:00Z"
     }
-  ],
+  ]
+}
+```
+
+### Pionext Transactions (`pionext_transactions.json`)
+- Platform-wide credit transaction history
+- Used for tracking credit purchases and trades
+- Key data points:
+  - Transaction history
+  - Purchase records
+- Example:
+```json
+{
   "transactions": [
     {
       "id": "txn_1",
@@ -81,9 +92,11 @@ This document describes the data structures and models used in the application.
 - Key data points:
   - Credit types
   - Credit values
-  - Credit metadata
+  - Current supply
+  - Maximum supply
+  - Target price
 
-### Credit Trades (`credit_trades.json`)
+### Credit Transactions (`credit_transactions.json`)
 - Trading history and transactions
 - Used for tracking credit exchanges
 - Key data points:
@@ -91,7 +104,7 @@ This document describes the data structures and models used in the application.
   - Transaction details
   - Trading metrics
 
-### Credit Holdings (`credit_holdings.json`)
+### Credit Balances (`credit_balances.json`)
 - Current credit ownership data
 - Used for tracking credit ownership
 - Key data points:
@@ -102,11 +115,11 @@ This document describes the data structures and models used in the application.
 ## Data Flow
 
 ```
-Projects <-> Credits <-> Credit Trades
+Projects <-> Credits <-> Credit Transactions
     ↑           ↑
-    └─── Users ─┴─> Credit Holdings
+    └─── Users ─┴─> Credit Balances
          ↓
-    Pionext Credits
+    Pionext Balances/Transactions
 ```
 
 ## Authentication Flow

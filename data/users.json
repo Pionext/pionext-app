@@ -47,6 +47,16 @@
       "bio": null,
       "role": "user",
       "joinedAt": "2024-12-12T15:16:42.859Z"
+    },
+    {
+      "id": "88c208e2-16fd-426b-b701-845d6516afb1",
+      "email": "alice@test.com",
+      "passwordHash": "$2b$10$iowVNuEsE0cpUFCWZvPP3.d2ej7kW2UYWWdNIp7NKdfK7ERU9O66O",
+      "username": "alice",
+      "name": "Alice test",
+      "bio": null,
+      "role": "user",
+      "joinedAt": "2024-12-12T16:20:49.050Z"
     }
   ]
 }

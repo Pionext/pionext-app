@@ -1,27 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useAuth } from "@/hooks/use-auth";
 
-interface PionextCreditsData {
-  balances: Array<{
-    userId: string;
-    balance: number;
-    lastUpdated: string;
-  }>;
-  transactions: Array<{
-    id: string;
-    userId: string;
-    type: "purchase";
-    amount: number;
-    timestamp: string;
-  }>;
+interface Transaction {
+  id: string;
+  userId: string;
+  type: "purchase";
+  amount: number;
+  timestamp: string;
 }
 
-export function usePionextCredits() {
+interface PionextCreditsContextType {
+  balance: number;
+  setBalance: (balance: number) => void;
+  transactions: Transaction[];
+  isLoading: boolean;
+  purchaseCredits: (amount: number) => Promise<Transaction>;
+}
+
+const PionextCreditsContext = createContext<PionextCreditsContextType | null>(null);
+
+export function PionextCreditsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [balance, setBalance] = useState(0);
-  const [transactions, setTransactions] = useState<PionextCreditsData["transactions"]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchBalance = async (userId: string) => {
@@ -76,10 +79,23 @@ export function usePionextCredits() {
     }
   };
 
-  return {
-    balance,
-    transactions,
-    isLoading,
-    purchaseCredits
-  };
+  return (
+    <PionextCreditsContext.Provider value={{
+      balance,
+      setBalance,
+      transactions,
+      isLoading,
+      purchaseCredits
+    }}>
+      {children}
+    </PionextCreditsContext.Provider>
+  );
+}
+
+export function usePionextCredits() {
+  const context = useContext(PionextCreditsContext);
+  if (!context) {
+    throw new Error("usePionextCredits must be used within a PionextCreditsProvider");
+  }
+  return context;
 } 

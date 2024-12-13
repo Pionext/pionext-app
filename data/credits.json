@@ -6,7 +6,7 @@
       "symbol": "PION",
       "name": "Pioneer Credits",
       "targetPrice": 1,
-      "currentSupply": 50200,
+      "currentSupply": 50600,
       "maxSupply": 60000
     },
     {
@@ -33,7 +33,7 @@
       "symbol": "HELA",
       "name": "AI Health Assistant Credits",
       "targetPrice": 1,
-      "currentSupply": 0,
+      "currentSupply": 11000,
       "maxSupply": 60000
     }
   ]

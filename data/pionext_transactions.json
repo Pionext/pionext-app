@@ -1,26 +1,4 @@
 {
-  "balances": [
-    {
-      "userId": "usr_1",
-      "balance": 1000,
-      "lastUpdated": "2024-03-20T12:00:00Z"
-    },
-    {
-      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 1022.7591666666661,
-      "lastUpdated": "2024-12-12T15:25:32.175Z"
-    },
-    {
-      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
-      "balance": 157.22246296296296,
-      "lastUpdated": "2024-12-12T14:22:20.032Z"
-    },
-    {
-      "userId": "372752ac-58b5-4816-9cef-482a7a440a9e",
-      "balance": 179.4166666666666,
-      "lastUpdated": "2024-12-12T15:26:54.355Z"
-    }
-  ],
   "transactions": [
     {
       "id": "txn_1",
@@ -140,6 +118,34 @@
       "type": "purchase",
       "amount": 1000,
       "timestamp": "2024-12-12T15:17:00.653Z"
+    },
+    {
+      "id": "txn_1734020478461",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1",
+      "type": "purchase",
+      "amount": 100,
+      "timestamp": "2024-12-12T16:21:18.461Z"
+    },
+    {
+      "id": "txn_1734080499892",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 100,
+      "timestamp": "2024-12-13T09:01:39.892Z"
+    },
+    {
+      "id": "txn_1734098620109",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 100,
+      "timestamp": "2024-12-13T14:03:40.109Z"
+    },
+    {
+      "id": "txn_1734098807958",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 100,
+      "timestamp": "2024-12-13T14:06:47.958Z"
     }
   ]
 }

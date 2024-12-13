@@ -12,26 +12,34 @@ export async function POST(request: Request) {
     const body: PurchaseRequest = await request.json();
     const { userId, amount } = body;
 
-    const creditsPath = path.join(process.cwd(), 'data', 'pionext_credits.json');
-    const creditsContent = await fs.readFile(creditsPath, 'utf-8');
-    const creditsData = JSON.parse(creditsContent);
+    const balancesPath = path.join(process.cwd(), 'data', 'pionext_balances.json');
+    const transactionsPath = path.join(process.cwd(), 'data', 'pionext_transactions.json');
+
+    // Read both files
+    const [balancesContent, transactionsContent] = await Promise.all([
+      fs.readFile(balancesPath, 'utf-8'),
+      fs.readFile(transactionsPath, 'utf-8')
+    ]);
+
+    const balancesData = JSON.parse(balancesContent);
+    const transactionsData = JSON.parse(transactionsContent);
 
     // Find or create user balance
-    let userBalance = creditsData.balances.find((b: any) => b.userId === userId);
+    let userBalance = balancesData.balances.find((b: any) => b.userId === userId);
     if (!userBalance) {
       userBalance = {
         userId,
         balance: 0,
         lastUpdated: new Date().toISOString()
       };
-      creditsData.balances.push(userBalance);
+      balancesData.balances.push(userBalance);
     }
 
     // Update balance
     userBalance.balance += amount;
     userBalance.lastUpdated = new Date().toISOString();
 
-    // Add transaction
+    // Create transaction
     const transaction = {
       id: `txn_${Date.now()}`,
       userId,
@@ -39,10 +47,13 @@ export async function POST(request: Request) {
       amount,
       timestamp: new Date().toISOString()
     };
-    creditsData.transactions.push(transaction);
+    transactionsData.transactions.push(transaction);
 
-    // Save changes
-    await fs.writeFile(creditsPath, JSON.stringify(creditsData, null, 2));
+    // Save both files
+    await Promise.all([
+      fs.writeFile(balancesPath, JSON.stringify(balancesData, null, 2)),
+      fs.writeFile(transactionsPath, JSON.stringify(transactionsData, null, 2))
+    ]);
 
     return NextResponse.json({
       balance: userBalance.balance,

@@ -18,15 +18,15 @@
       "id": "hold_1733999170947",
       "creditId": "cred_1",
       "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 100,
-      "lastUpdated": "2024-12-12T11:12:48.448Z"
+      "balance": 500,
+      "lastUpdated": "2024-12-13T14:19:20.654Z"
     },
     {
       "id": "hold_1733999755689",
       "creditId": "cred_4",
       "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 0,
-      "lastUpdated": "2024-12-12T15:25:32.175Z"
+      "balance": 10000,
+      "lastUpdated": "2024-12-12T16:23:42.799Z"
     },
     {
       "id": "hold_1734002030242",
@@ -55,6 +55,13 @@
       "userId": "372752ac-58b5-4816-9cef-482a7a440a9e",
       "balance": 0,
       "lastUpdated": "2024-12-12T15:26:54.355Z"
+    },
+    {
+      "id": "hold_1734020516381",
+      "creditId": "cred_4",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1",
+      "balance": 1000,
+      "lastUpdated": "2024-12-12T16:24:49.795Z"
     }
   ]
 }

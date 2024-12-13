@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/use-auth';
-import { useCredits } from '@/contexts/credits-context';
+import { usePionextCredits } from '@/contexts/pionext-credits-context';
 import creditsData from '@/data/credits.json';
-import holdingsData from '@/data/credit_holdings.json';
+import holdingsData from '@/data/credit_balances.json';
 
 interface Credit {
   id: string;
@@ -37,7 +37,7 @@ interface Trade {
 
 export function useProjectCredits(projectId: string) {
   const { user } = useAuth();
-  const { setBalance } = useCredits();
+  const { setBalance } = usePionextCredits();
   const [credits, setCredits] = useState<Credit | null>(null);
   const [holding, setHolding] = useState<CreditHolding | null>(null);
   const [isLoading, setIsLoading] = useState(true);

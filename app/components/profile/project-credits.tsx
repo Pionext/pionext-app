@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
 import creditsData from "@/data/credits.json";
-import holdingsData from "@/data/credit_holdings.json";
+import holdingsData from "@/data/credit_balances.json";
 import { calculatePrice } from "@/utils/bonding-curve";
 import Link from "next/link";
 

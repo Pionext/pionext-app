@@ -14,12 +14,19 @@ export async function GET(request: Request) {
       );
     }
 
-    const creditsPath = path.join(process.cwd(), 'data', 'pionext_credits.json');
-    const creditsContent = await fs.readFile(creditsPath, 'utf-8');
-    const creditsData = JSON.parse(creditsContent);
+    const balancesPath = path.join(process.cwd(), 'data', 'pionext_balances.json');
+    const transactionsPath = path.join(process.cwd(), 'data', 'pionext_transactions.json');
+    
+    const [balancesContent, transactionsContent] = await Promise.all([
+      fs.readFile(balancesPath, 'utf-8'),
+      fs.readFile(transactionsPath, 'utf-8')
+    ]);
 
-    const userBalance = creditsData.balances.find((b: any) => b.userId === userId);
-    const userTransactions = creditsData.transactions.filter((t: any) => t.userId === userId);
+    const balancesData = JSON.parse(balancesContent);
+    const transactionsData = JSON.parse(transactionsContent);
+
+    const userBalance = balancesData.balances.find((b: any) => b.userId === userId);
+    const userTransactions = transactionsData.transactions.filter((t: any) => t.userId === userId);
 
     return NextResponse.json({
       balance: userBalance?.balance || 0,
@@ -32,4 +39,4 @@ export async function GET(request: Request) {
       { status: 500 }
     );
   }
-} 
+}

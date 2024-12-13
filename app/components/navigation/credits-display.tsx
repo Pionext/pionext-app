@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { Coins } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCredits } from "@/contexts/credits-context";
+import { usePionextCredits } from "@/contexts/pionext-credits-context";
 
 export function CreditsDisplay() {
-  const { balance, isLoading } = useCredits();
+  const { balance, isLoading } = usePionextCredits();
 
   if (isLoading) {
     return null;

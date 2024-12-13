@@ -16,17 +16,17 @@ export async function POST(request: Request) {
     const { userId, creditId, type, amount } = body;
 
     // Read all necessary files
-    const [creditsContent, holdingsContent, tradesContent, pionextContent] = await Promise.all([
+    const [creditsContent, holdingsContent, tradesContent, balancesContent] = await Promise.all([
       fs.readFile(path.join(process.cwd(), 'data', 'credits.json'), 'utf-8'),
-      fs.readFile(path.join(process.cwd(), 'data', 'credit_holdings.json'), 'utf-8'),
-      fs.readFile(path.join(process.cwd(), 'data', 'credit_trades.json'), 'utf-8'),
-      fs.readFile(path.join(process.cwd(), 'data', 'pionext_credits.json'), 'utf-8')
+      fs.readFile(path.join(process.cwd(), 'data', 'credit_balances.json'), 'utf-8'),
+      fs.readFile(path.join(process.cwd(), 'data', 'credit_transactions.json'), 'utf-8'),
+      fs.readFile(path.join(process.cwd(), 'data', 'pionext_balances.json'), 'utf-8')
     ]);
 
     const creditsData = JSON.parse(creditsContent);
     const holdingsData = JSON.parse(holdingsContent);
     const tradesData = JSON.parse(tradesContent);
-    const pionextData = JSON.parse(pionextContent);
+    const balancesData = JSON.parse(balancesContent);
 
     // Get the credit being traded
     const credit = creditsData.credits.find((c: any) => c.id === creditId);
@@ -35,9 +35,9 @@ export async function POST(request: Request) {
     }
 
     // Get user's PIONEXT balance and project credit holdings
-    const pionextBalance = pionextData.balances.find((b: any) => b.userId === userId)?.balance || 0;
+    const pionextBalance = balancesData.balances.find((b: any) => b.userId === userId)?.balance || 0;
     let holding = holdingsData.holdings.find((h: any) => h.userId === userId && h.creditId === creditId);
-    
+
     // Simulate the trade
     const simulation = type === 'buy' 
       ? simulatePurchase(amount, credit)
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       : credit.currentSupply - amount;
 
     // Update user's PIONEXT balance
-    const pionextBalanceRecord = pionextData.balances.find((b: any) => b.userId === userId);
+    const pionextBalanceRecord = balancesData.balances.find((b: any) => b.userId === userId);
     if (type === 'buy') {
       pionextBalanceRecord.balance -= simulation.cost;
     } else {
@@ -103,9 +103,9 @@ export async function POST(request: Request) {
     // Save all changes
     await Promise.all([
       fs.writeFile(path.join(process.cwd(), 'data', 'credits.json'), JSON.stringify(creditsData, null, 2)),
-      fs.writeFile(path.join(process.cwd(), 'data', 'credit_holdings.json'), JSON.stringify(holdingsData, null, 2)),
-      fs.writeFile(path.join(process.cwd(), 'data', 'credit_trades.json'), JSON.stringify(tradesData, null, 2)),
-      fs.writeFile(path.join(process.cwd(), 'data', 'pionext_credits.json'), JSON.stringify(pionextData, null, 2))
+      fs.writeFile(path.join(process.cwd(), 'data', 'credit_balances.json'), JSON.stringify(holdingsData, null, 2)),
+      fs.writeFile(path.join(process.cwd(), 'data', 'credit_transactions.json'), JSON.stringify(tradesData, null, 2)),
+      fs.writeFile(path.join(process.cwd(), 'data', 'pionext_balances.json'), JSON.stringify(balancesData, null, 2))
     ]);
 
     return NextResponse.json({

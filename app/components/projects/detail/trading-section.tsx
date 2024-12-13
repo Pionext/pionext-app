@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useProjectCredits } from "@/hooks/use-project-credits";
-import { useCredits } from "@/contexts/credits-context";
+import { usePionextCredits } from "@/contexts/pionext-credits-context";
 import { 
   getBondingCurvePoints, 
   simulatePurchase, 
@@ -29,7 +29,7 @@ const getSimulationAmount = (simulation: PurchaseResult | SaleResult) => {
 
 export function TradingSection({ projectId }: TradingSectionProps) {
   const { credits, holding, tradeCredits } = useProjectCredits(projectId);
-  const { balance: pionextBalance } = useCredits();
+  const { balance: pionextBalance } = usePionextCredits();
   const [amount, setAmount] = useState('');
   const [action, setAction] = useState<'buy' | 'sell'>('buy');
   const [isLoading, setIsLoading] = useState(false);

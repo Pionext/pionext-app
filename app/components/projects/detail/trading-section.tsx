@@ -10,6 +10,7 @@ import {
   simulatePurchase, 
   simulateSale,
   calculatePrice,
+  calculateCost,
   type PurchaseResult,
   type SaleResult 
 } from "@/utils/bonding-curve";
@@ -19,17 +20,10 @@ interface TradingSectionProps {
   projectId: string;
 }
 
-const getSimulationAmount = (simulation: PurchaseResult | SaleResult) => {
-  if ('cost' in simulation) {
-    return simulation.cost.toFixed(2);
-  }
-  return simulation.proceeds.toFixed(2);
-};
-
 export function TradingSection({ projectId }: TradingSectionProps) {
   const { credits, holding, tradeCredits } = useProjectCredits(projectId);
   const { balance: pionextBalance } = usePionextCredits();
-  const [amount, setAmount] = useState('');
+  const [pionextAmount, setPionextAmount] = useState('');
   const [action, setAction] = useState<'buy' | 'sell'>('buy');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,17 +35,70 @@ export function TradingSection({ projectId }: TradingSectionProps) {
     maxSupply: credits.maxSupply
   });
 
-  // Calculate simulation results
+  // Binary search to find the amount of credits that costs close to the target PIONEXT amount
+  const getCreditAmount = (pionextValue: number) => {
+    if (pionextValue <= 0) return 0;
+    
+    let low = 0;
+    let high = action === 'buy' 
+      ? credits.maxSupply - credits.currentSupply
+      : (holding?.balance || 0);
+    
+    // For very small amounts, start with a smaller range
+    if (pionextValue < currentPrice) {
+      high = Math.min(high, Math.ceil(pionextValue / (currentPrice * 0.5)));
+    }
+
+    let bestAmount = 0;
+    let bestDiff = Number.MAX_VALUE;
+
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      
+      const simulation = action === 'buy'
+        ? simulatePurchase(mid, credits)
+        : simulateSale(mid, credits);
+
+      if (!simulation) {
+        high = mid - 1;
+        continue;
+      }
+
+      const cost = action === 'buy' 
+        ? (simulation as PurchaseResult).cost 
+        : (simulation as SaleResult).proceeds;
+      const diff = Math.abs(cost - pionextValue);
+
+      // Update best if this is closer to target
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        bestAmount = mid;
+      }
+
+      if (cost > pionextValue) {
+        high = mid - 1;
+      } else if (cost < pionextValue) {
+        low = mid + 1;
+      } else {
+        return mid; // Exact match
+      }
+    }
+
+    return bestAmount;
+  };
+
+  // Calculate simulation results based on PIONEXT amount
+  const creditAmount = getCreditAmount(Number(pionextAmount) || 0);
   const simulation = action === 'buy' 
-    ? simulatePurchase(Number(amount) || 0, credits)
-    : simulateSale(Number(amount) || 0, credits);
+    ? simulatePurchase(creditAmount, credits)
+    : simulateSale(creditAmount, credits);
 
   const handleTrade = async () => {
     try {
       setError(null);
       setIsLoading(true);
-      await tradeCredits(action, Number(amount));
-      setAmount('');
+      await tradeCredits(action, creditAmount);
+      setPionextAmount('');
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to trade credits');
     } finally {
@@ -60,11 +107,24 @@ export function TradingSection({ projectId }: TradingSectionProps) {
   };
 
   const canTrade = () => {
-    if (!amount || Number(amount) <= 0 || !simulation) return false;
+    if (!pionextAmount || Number(pionextAmount) <= 0 || !simulation) return false;
     if (action === 'buy') {
-      return pionextBalance >= (simulation as PurchaseResult).cost;
+      return pionextBalance >= Number(pionextAmount);
     } else {
-      return holding ? holding.balance >= Number(amount) : false;
+      return holding ? holding.balance >= creditAmount : false;
+    }
+  };
+
+  // Calculate max amounts in PIONEXT tokens
+  const getMaxAmount = () => {
+    if (action === 'buy') {
+      const maxCredits = credits.maxSupply - credits.currentSupply;
+      const simulation = simulatePurchase(maxCredits, credits);
+      return simulation ? (simulation as PurchaseResult).cost.toFixed(2) : '0';
+    } else {
+      if (!holding?.balance) return '0';
+      const simulation = simulateSale(holding.balance, credits);
+      return simulation ? (simulation as SaleResult).proceeds.toFixed(2) : '0';
     }
   };
 
@@ -124,24 +184,25 @@ export function TradingSection({ projectId }: TradingSectionProps) {
 
             <div className="space-y-2">
               <div className="flex justify-between">
-                <label className="text-sm">Amount</label>
+                <label className="text-sm">Amount in PIONEXT (USD)</label>
                 <span className="text-sm text-gray-500">
-                  Max: {action === 'buy' 
-                    ? credits.maxSupply - credits.currentSupply 
-                    : holding?.balance || 0
-                  }
+                  Max: ${getMaxAmount()}
                 </span>
               </div>
               <Input
                 type="number"
-                placeholder="Enter amount of credits"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount in PIONEXT"
+                value={pionextAmount}
+                onChange={(e) => setPionextAmount(e.target.value)}
               />
             </div>
 
             {simulation && (
               <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
+                <div className="flex justify-between text-sm">
+                  <span>Credits to {action}</span>
+                  <span>{creditAmount.toLocaleString()} {credits.symbol}</span>
+                </div>
                 <div className="flex justify-between text-sm">
                   <span>Average Price</span>
                   <span>${isNaN(simulation.averagePrice) ? '0.0000' : simulation.averagePrice.toFixed(4)}</span>
@@ -156,7 +217,7 @@ export function TradingSection({ projectId }: TradingSectionProps) {
                 <div className="flex justify-between text-sm font-medium">
                   <span>Total {action === 'buy' ? 'Cost' : 'Receive'}</span>
                   <span>
-                    ${simulation && getSimulationAmount(simulation)}
+                    ${Number(pionextAmount).toFixed(2)} PIONEXT
                   </span>
                 </div>
               </div>

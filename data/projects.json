@@ -300,6 +300,96 @@
       "maxSupply": 30000,
       "launchDate": "2025-01-22",
       "status": "Active",
+      "userId": "usr_1"
+    },
+    {
+      "id": "proj_4",
+      "name": "AI Health Assistant",
+      "description": "Do great health stuff",
+      "creditSymbol": "HELA",
+      "targetRaise": 20000,
+      "materials": [
+        {
+          "title": "Cool",
+          "url": "http://localhost:3000/projects/new",
+          "type": "Website"
+        }
+      ],
+      "maxSupply": 60000,
+      "launchDate": "2024-12-04",
+      "status": "Active",
+      "userId": "usr_1"
+    },
+    {
+      "id": "proj_5",
+      "name": "Project-one",
+      "description": "A next-generation DeFi aggregator that optimizes yields across multiple protocols.\\n\\nKey features:\\n• Smart routing\\n• Multi-chain support\\n• Automated rebalancing",
+      "creditSymbol": "PION",
+      "targetRaise": 1000,
+      "materials": [
+        {
+          "title": "MVP",
+          "url": "http://localhost:3001/projects/new",
+          "type": "Website"
+        }
+      ],
+      "maxSupply": 3000,
+      "launchDate": "2025-01-17",
+      "status": "Active",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
+    },
+    {
+      "id": "proj_6",
+      "name": "DeFi Aggregator",
+      "description": "A next-generation DeFi aggregator that optimizes yields across multiple protocols.\\n\\nKey features:\\n• Smart routing\\n• Multi-chain support\\n• Automated rebalancing",
+      "creditSymbol": "PION",
+      "targetRaise": 1000,
+      "materials": [
+        {
+          "title": "MVP",
+          "url": "http://localhost:3001/projects/new",
+          "type": "Website"
+        }
+      ],
+      "maxSupply": 3000,
+      "launchDate": "2025-01-17",
+      "status": "Active",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
+    },
+    {
+      "id": "proj_7",
+      "name": "DeFi Aggregator",
+      "description": "A next-generation DeFi aggregator that optimizes yields across multiple protocols.\\\\\\\\n\\\\\\\\nKey features:\\\\\\\\n• Smart routing\\\\\\\\n• Multi-chain support\\\\\\\\n• Automated rebalancing",
+      "creditSymbol": "PION",
+      "targetRaise": 1000,
+      "materials": [
+        {
+          "title": "MVP",
+          "url": "http://localhost:3001/projects/new",
+          "type": "Website"
+        }
+      ],
+      "maxSupply": 3000,
+      "launchDate": "2025-01-17",
+      "status": "Active",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
+    },
+    {
+      "id": "proj_8",
+      "name": "read",
+      "description": "A next-generation DeFi aggregator that optimizes yields across multiple",
+      "creditSymbol": "PION",
+      "targetRaise": 1000,
+      "materials": [
+        {
+          "title": "MVP",
+          "url": "http://localhost:3001/projects/new",
+          "type": "Website"
+        }
+      ],
+      "maxSupply": 3000,
+      "launchDate": "2025-01-17",
+      "status": "Active",
       "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
     }
   ]

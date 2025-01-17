@@ -431,6 +431,33 @@
       "amount": 41,
       "price": 0.7229676145371053,
       "timestamp": "2025-01-13T11:29:54.995Z"
+    },
+    {
+      "id": "trd_1737107111552",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 12,
+      "price": 0.7225566711110964,
+      "timestamp": "2025-01-17T09:45:11.552Z"
+    },
+    {
+      "id": "trd_1737107185412",
+      "creditId": "cred_1",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 14,
+      "price": 0.7229250670371627,
+      "timestamp": "2025-01-17T09:46:25.412Z"
+    },
+    {
+      "id": "trd_1737108960039",
+      "creditId": "cred_8",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 646,
+      "price": 0.015456148148148146,
+      "timestamp": "2025-01-17T10:16:00.039Z"
     }
   ]
 }

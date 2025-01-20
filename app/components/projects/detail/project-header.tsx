@@ -1,18 +1,15 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { useProjectCredits } from "@/hooks/use-project-credits";
 import { calculatePrice } from "@/utils/bonding-curve";
-import { cn } from "@/lib/utils";
 
 interface ProjectHeaderProps {
   projectId: string;
   name: string;
   launchDate: string;
-  status: "Active" | "Completed" | "Upcoming";
 }
 
-export function ProjectHeader({ projectId, name, launchDate, status }: ProjectHeaderProps) {
+export function ProjectHeader({ projectId, name, launchDate }: ProjectHeaderProps) {
   const { credits } = useProjectCredits(projectId);
   const currentPrice = credits ? calculatePrice(credits.currentSupply, credits) : 0;
 
@@ -31,15 +28,6 @@ export function ProjectHeader({ projectId, name, launchDate, status }: ProjectHe
           Launched {new Date(launchDate).toLocaleDateString()}
         </p>
       </div>
-      <Badge 
-        variant={status === "Active" ? "default" : "secondary"}
-        className={cn(
-          "w-fit",
-          status === "Active" && "bg-[#0000FF] hover:bg-[#0000FF]/80"
-        )}
-      >
-        {status}
-      </Badge>
     </div>
   );
 } 

@@ -4,6 +4,7 @@ import { ProjectHeader } from "@/app/components/projects/detail/project-header";
 import { TradingSection } from "@/app/components/projects/detail/trading-section";
 import { ProjectOverview } from "@/app/components/projects/detail/project-overview";
 import { BuilderInfo } from "@/app/components/projects/detail/builder-info";
+import { TradingWidget } from "@/app/components/projects/detail/trading-widget";
 import { useProject } from "@/hooks/use-project";
 import { Project } from "@/types/project";
 
@@ -34,7 +35,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           projectId={typedProject.id}
           name={typedProject.name}
           launchDate={typedProject.launchDate}
-          status={typedProject.status}
         />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -46,6 +46,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           
           {/* Sidebar - 1 column */}
           <div className="space-y-8">
+            <TradingWidget 
+              projectId={typedProject.id}
+              projectName={typedProject.name}
+            />
             {typedProject.builder && <BuilderInfo builder={typedProject.builder} />}
           </div>
         </div>

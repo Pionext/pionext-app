@@ -18,10 +18,9 @@ import { getBondingCurvePoints, calculatePrice } from "@/utils/bonding-curve";
 const chartConfig = {
   price: {
     label: "Price",
-    color: "#0000FF",
     theme: {
-      light: "#E8F4FF",  // Clearer light blue color
-      dark: "#0000FF",   // Regular blue for dark theme
+      light: "#E8F4FF",
+      dark: "#0000FF"
     }
   },
 } satisfies ChartConfig;

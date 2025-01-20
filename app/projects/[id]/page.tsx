@@ -5,30 +5,7 @@ import { TradingSection } from "@/app/components/projects/detail/trading-section
 import { ProjectOverview } from "@/app/components/projects/detail/project-overview";
 import { BuilderInfo } from "@/app/components/projects/detail/builder-info";
 import { useProject } from "@/hooks/use-project";
-
-type MaterialType = "PDF" | "Video" | "Website" | "Other";
-type ProjectStatus = "Active" | "Completed" | "Upcoming";
-
-interface Project {
-  id: string;
-  name: string;
-  description: string;
-  launchDate: string;
-  status: ProjectStatus;
-  materials: {
-    title: string;
-    url: string;
-    type: MaterialType;
-  }[];
-  builder?: {
-    id: string;
-    username: string;
-    name: string;
-    email: string;
-    bio?: string;
-    role: "builder" | "user";
-  };
-}
+import { Project } from "@/types/project";
 
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
   const { project, isLoading, error } = useProject(params.id);
@@ -63,13 +40,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main content - 2 columns */}
           <div className="lg:col-span-2 space-y-8">
-            <ProjectOverview 
-              projectId={typedProject.id}
-              description={typedProject.description}
-              materials={typedProject.materials}
-              launchDate={typedProject.launchDate}
-              status={typedProject.status}
-            />
+            <ProjectOverview project={typedProject} />
             <TradingSection projectId={typedProject.id} />
           </div>
           

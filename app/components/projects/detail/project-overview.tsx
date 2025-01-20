@@ -1,129 +1,256 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent } from "@/components/ui/card";
 import { useProjectCredits } from "@/hooks/use-project-credits";
 import { calculateCurrentRaise, calculateTotalRaise } from "@/utils/bonding-curve";
-import { ExternalLink } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Project } from "@/types/project";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import Image from "next/image";
 
 interface ProjectOverviewProps {
-  projectId: string;
-  description: string;
-  materials: {
-    title: string;
-    url: string;
-    type: "PDF" | "Video" | "Website" | "Other";
-  }[];
-  launchDate: string;
-  status: "Active" | "Completed" | "Upcoming";
+  project: Project;
 }
 
-export function ProjectOverview({ projectId, description, materials, launchDate, status }: ProjectOverviewProps) {
-  const { credits } = useProjectCredits(projectId);
+type TabType = "overview" | "about" | "features" | "economics" | "team";
 
-  if (!credits) {
-    return null;
-  }
+export function ProjectOverview({ project }: ProjectOverviewProps) {
+  const { credits } = useProjectCredits(project.id);
+  const currentRaise = credits ? calculateCurrentRaise(credits) : 0;
+  const totalRaise = credits ? calculateTotalRaise(credits) : 0;
+  const [activeTab, setActiveTab] = useState<TabType>("overview");
 
-  const amountRaised = calculateCurrentRaise(credits);
-  const fundingGoal = calculateTotalRaise(credits);
-  const progress = (amountRaised / fundingGoal) * 100;
-
-  // Group materials by type for better organization
-  const groupedMaterials = materials.reduce((acc, material) => {
-    if (!acc[material.type]) {
-      acc[material.type] = [];
-    }
-    acc[material.type].push(material);
-    return acc;
-  }, {} as Record<string, typeof materials>);
+  const tabs = [
+    { id: "overview" as const, label: "Overview" },
+    { id: "about" as const, label: "Mission" },
+    { id: "features" as const, label: "Features" },
+    { id: "economics" as const, label: "Economics" },
+    ...(project.details?.team ? [{ id: "team" as const, label: "Team" }] : []),
+  ];
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle>Project Overview</CardTitle>
-          <Badge variant={status === "Active" ? "default" : status === "Completed" ? "secondary" : "outline"}>
-            {status}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-8">
-        {/* Project Stats */}
-        <div className="grid grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg">
-          <div>
-            <p className="text-sm text-gray-500">Launch Date</p>
-            <p className="font-medium">
-              {new Date(launchDate).toLocaleDateString()}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Credit Supply</p>
-            <p className="font-medium">
-              {credits.currentSupply.toLocaleString()} / {credits.maxSupply.toLocaleString()}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Credit Symbol</p>
-            <p className="font-medium">{credits.symbol}</p>
-          </div>
-        </div>
-
-        {/* Description */}
-        <div>
-          <h3 className="font-semibold mb-3">About the Project</h3>
-          <div className="prose prose-sm max-w-none">
-            {description.split('\n').map((paragraph, index) => (
-              <p key={index} className="whitespace-pre-line text-gray-600">
-                {paragraph}
-              </p>
+      <CardContent className="p-6">
+        {/* Custom Tab Navigation */}
+        <div className="border-b mb-6">
+          <div className="flex space-x-8">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "pb-2 -mb-px text-sm font-medium transition-colors relative",
+                  activeTab === tab.id
+                    ? "text-black border-b-2 border-black"
+                    : "text-gray-500 hover:text-gray-700"
+                )}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Funding Stats */}
-        <div>
-          <h3 className="font-semibold mb-4">Funding Progress</h3>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Amount Raised</span>
-              <span className="font-medium">
-                ${amountRaised.toLocaleString(undefined, { maximumFractionDigits: 2 })} / 
-                ${fundingGoal.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-              </span>
-            </div>
-            <Progress value={progress} className="h-2" />
-            <p className="text-sm text-gray-500 mt-1">
-              {progress.toFixed(1)}% of funding goal reached
-            </p>
-          </div>
-        </div>
+        {/* Overview Tab */}
+        {activeTab === "overview" && (
+          <div className="space-y-6">
+            {/* Project Image */}
+            {project.image && (
+              <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                <Image
+                  src={project.image.url}
+                  alt={project.image.alt || project.name}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
 
-        {/* Supporting Materials */}
-        {Object.keys(groupedMaterials).length > 0 && (
-          <div>
-            <h3 className="font-semibold mb-4">Supporting Materials</h3>
-            <div className="grid gap-4">
-              {Object.entries(groupedMaterials).map(([type, items]) => (
-                <div key={type}>
-                  <h4 className="text-sm font-medium text-gray-500 mb-2">{type}s</h4>
-                  <div className="space-y-2">
-                    {items.map((material, index) => (
-                      <a
-                        key={index}
-                        href={material.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 transition-colors"
-                      >
-                        <span className="font-medium">{material.title}</span>
-                        <ExternalLink className="h-4 w-4 text-gray-400" />
-                      </a>
-                    ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="col-span-2">
+                <p className="text-gray-600">{project.description}</p>
+              </div>
+              <div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold mb-4">Project Stats</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-gray-500">Current Raise</p>
+                      <p className="text-2xl font-bold">${currentRaise.toLocaleString()}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Total Raise</p>
+                      <p className="text-2xl font-bold">${totalRaise.toLocaleString()}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Launch Date</p>
+                      <p className="text-lg font-semibold">
+                        {new Date(project.launchDate).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Status</p>
+                      <p className="text-lg font-semibold capitalize">{project.status}</p>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
+            </div>
+
+            {/* Supporting Materials */}
+            {project.materials && project.materials.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Supporting Materials</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {project.materials.map((material, index) => (
+                    <a
+                      key={index}
+                      href={material.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      <div>
+                        <p className="font-medium">{material.title}</p>
+                        <p className="text-sm text-gray-500 capitalize">{material.type}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* About Tab */}
+        {activeTab === "about" && (
+          <div className="space-y-8">
+            {/* Problem & Solution */}
+            {project.details?.problemSolution && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Problem & Solution</h3>
+                <div className="space-y-4">
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-medium text-gray-900 mb-2">Problem</h4>
+                    <p className="text-gray-600">{project.details.problemSolution.problem}</p>
+                  </div>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-medium text-gray-900 mb-2">Solution</h4>
+                    <p className="text-gray-600">{project.details.problemSolution.solution}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Target Audience */}
+            {project.details?.targetAudience && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Target Audience</h3>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <ul className="list-disc list-inside text-gray-600 space-y-2">
+                    {project.details.targetAudience.map((audience, index) => (
+                      <li key={index}>{audience}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Features Tab */}
+        {activeTab === "features" && (
+          <div className="space-y-6">
+            {project.details?.keyFeatures && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Key Features</h3>
+                <div className="grid gap-4">
+                  {project.details.keyFeatures.map((feature, index) => (
+                    <div key={index} className="bg-gray-50 p-6 rounded-lg space-y-2">
+                      <h4 className="font-medium text-gray-900">{feature.title}</h4>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {project.details?.howItWorks && (
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold mb-4">How It Works</h3>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <ol className="list-decimal list-inside space-y-2 text-gray-600">
+                    {project.details.howItWorks.steps.map((step, index) => (
+                      <li key={index} className="pl-2">{step}</li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Economics Tab */}
+        {activeTab === "economics" && (
+          <div className="space-y-6">
+            {project.details?.creditUsage && (
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Credit Usage</h3>
+                <div className="grid gap-6">
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-medium text-gray-900 mb-2">Free Features</h4>
+                    <ul className="list-disc list-inside text-gray-600">
+                      {project.details.creditUsage.free.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h4 className="font-medium text-gray-900 mb-2">
+                      Premium Features (${project.details.creditUsage.premium.price}/month)
+                    </h4>
+                    <ul className="list-disc list-inside text-gray-600">
+                      {project.details.creditUsage.premium.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Team Tab */}
+        {activeTab === "team" && project.details?.team && (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Team Members</h3>
+              <div className="grid gap-6">
+                {project.details.team.members.map((member, index) => (
+                  <div key={index} className="bg-gray-50 p-6 rounded-lg space-y-2">
+                    <h4 className="font-medium text-gray-900">{member.name}</h4>
+                    <p className="text-sm text-gray-500">{member.role}</p>
+                    <p className="text-gray-600">{member.bio}</p>
+                    {member.links && member.links.length > 0 && (
+                      <div className="flex gap-2">
+                        {member.links.map((link, linkIndex) => (
+                          <a
+                            key={linkIndex}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-blue-600 hover:underline"
+                          >
+                            {link.title}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

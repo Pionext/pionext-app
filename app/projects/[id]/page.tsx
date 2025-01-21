@@ -1,7 +1,6 @@
 "use client";
 
 import { ProjectHeader } from "@/app/components/projects/detail/project-header";
-import { TradingSection } from "@/app/components/projects/detail/trading-section";
 import { ProjectOverview } from "@/app/components/projects/detail/project-overview";
 import { BuilderInfo } from "@/app/components/projects/detail/builder-info";
 import { TradingWidget } from "@/app/components/projects/detail/trading-widget";
@@ -41,7 +40,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           {/* Main content - 2 columns */}
           <div className="lg:col-span-2 space-y-8">
             <ProjectOverview project={typedProject} />
-            <TradingSection projectId={typedProject.id} />
           </div>
           
           {/* Sidebar - 1 column */}

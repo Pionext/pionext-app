@@ -131,7 +131,6 @@ export function Navigation() {
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className="flex items-center space-x-2">
-                      <UserCircle className="h-5 w-5" />
                       <span>{user.name}</span>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>

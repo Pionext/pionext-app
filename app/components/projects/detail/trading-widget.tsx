@@ -38,6 +38,14 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
 
   if (!credits) return null;
 
+  // Calculate discount percentage based on final price ($1)
+  const calculateDiscount = () => {
+    if (!credits || currentPrice <= 0) return 0;
+    return Math.round(((1 - currentPrice) / 1) * 100);
+  };
+
+  const discountPercentage = calculateDiscount();
+
   // Binary search to find the amount of credits that costs close to the target PIONEXT amount
   const getCreditAmount = (pionextValue: number) => {
     if (pionextValue <= 0) return 0;
@@ -148,58 +156,53 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
 
   return (
     <Card className="sticky top-8">
-      <CardContent className={cn(
-        "space-y-6",
-        showBondingCurve ? "p-4" : "p-6"
-      )}>
-        {showBondingCurve ? (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Bonding Curve</span>
-              <button 
-                className="p-1 rounded-md hover:bg-gray-100"
-                onClick={() => setShowBondingCurve(false)}
-              >
-                <LineChart className="h-4 w-4 text-gray-500" />
-              </button>
+      <CardContent className="space-y-6 p-6">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="w-full">
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-semibold">{credits.symbol}</h2>
+                {discountPercentage > 0 && (
+                  <span className="px-2 py-1 bg-red-100 text-red-700 rounded-md text-xs font-bold tracking-wider">
+                    {discountPercentage}% OFF
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-500">{credits.name}</p>
+                <p className="text-sm text-gray-500">Balance: {holding?.balance.toLocaleString() || 0}</p>
+              </div>
             </div>
-            <div className="-mx-4">
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">{showBondingCurve ? "Bonding Curve" : "Trade"}</span>
+            <button 
+              className="p-1 rounded-md hover:bg-gray-100"
+              onClick={() => setShowBondingCurve(!showBondingCurve)}
+            >
+              <LineChart className="h-4 w-4 text-gray-500" />
+            </button>
+          </div>
+          
+          {showBondingCurve ? (
+            <>
               <BondingCurveChart credit={{
                 symbol: credits.symbol,
                 name: credits.name,
                 currentSupply: credits.currentSupply,
                 maxSupply: credits.maxSupply
               }} />
-            </div>
-            <div className="flex justify-between text-xs text-gray-500">
-              <span>{credits.currentSupply.toLocaleString()} credits</span>
-              <span>{credits.maxSupply.toLocaleString()} max</span>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div className="flex items-center justify-between">
-              <div className="w-full">
-                <h2 className="text-lg font-semibold">{credits.symbol}</h2>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-gray-500">{credits.name}</p>
-                  <p className="text-sm text-gray-500">Balance: {holding?.balance.toLocaleString() || 0}</p>
-                </div>
+              <div className="flex justify-between text-xs text-gray-500 mt-2">
+                <span>{credits.currentSupply.toLocaleString()} credits</span>
+                <span>{credits.maxSupply.toLocaleString()} max</span>
               </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Trade</span>
-                <button 
-                  className="p-1 rounded-md hover:bg-gray-100"
-                  onClick={() => setShowBondingCurve(true)}
-                >
-                  <LineChart className="h-4 w-4 text-gray-500" />
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-2">
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-2 mb-6">
                 <button
                   onClick={() => setTradeType("buy")}
                   className={cn(
@@ -223,9 +226,7 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
                   Sell
                 </button>
               </div>
-            </div>
 
-            {!showBondingCurve && (
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between text-sm mb-2">
@@ -347,9 +348,9 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
                   By trading, you agree to the Terms of Use.
                 </p>
               </div>
-            )}
-          </>
-        )}
+            </>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

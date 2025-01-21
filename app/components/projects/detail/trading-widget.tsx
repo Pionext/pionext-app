@@ -328,19 +328,48 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
                 {user ? (
                   <Button 
                     className={cn(
-                      "w-full",
-                      tradeType === "buy" ? "bg-[#0000ff] hover:bg-[#0000ff]/90" : ""
+                      "w-full relative overflow-hidden h-12",
+                      tradeType === "buy" ? [
+                        "bg-[#0000FF]",
+                        "shadow-[0_8px_16px_-3px_rgba(0,0,255,0.4)]",
+                        "after:absolute after:inset-0",
+                        "after:bg-gradient-to-b after:from-white/20 after:to-transparent",
+                        "after:rounded-[inherit]",
+                        "hover:translate-y-[1px]",
+                        "hover:shadow-[0_6px_12px_-3px_rgba(0,0,255,0.4)]",
+                        "hover:bg-[#0000CC]",
+                        "active:translate-y-[2px]",
+                        "active:shadow-[0_4px_8px_-3px_rgba(0,0,255,0.4)]",
+                        "active:bg-[#000099]",
+                        "transition-all duration-200"
+                      ].join(" ") : "bg-gray-100 text-gray-600 hover:bg-gray-200",
+                      "disabled:opacity-50 disabled:pointer-events-none"
                     )}
                     size="lg"
                     onClick={handleTrade}
                     disabled={!canTrade() || isLoading}
-                    variant={tradeType === "buy" ? "default" : "secondary"}
                   >
-                    {isLoading ? 'Processing...' : tradeType === "buy" ? "Buy" : "Sell"}
+                    <span className="relative z-10">
+                      {isLoading ? 'Processing...' : (tradeType === "buy" ? "Buy" : "Sell")}
+                    </span>
                   </Button>
                 ) : (
-                  <Button className="w-full" size="lg">
-                    Log In to Trade
+                  <Button 
+                    className={cn(
+                      "w-full relative overflow-hidden h-12",
+                      "bg-[#0000FF]",
+                      "shadow-[0_8px_16px_-3px_rgba(0,0,255,0.4)]",
+                      "after:absolute after:inset-0",
+                      "after:bg-gradient-to-b after:from-white/20 after:to-transparent",
+                      "after:rounded-[inherit]",
+                      "hover:translate-y-[1px]",
+                      "hover:shadow-[0_6px_12px_-3px_rgba(0,0,255,0.4)]",
+                      "hover:bg-[#0000CC]",
+                      "transition-all duration-200"
+                    )}
+                    size="lg"
+                  >
+                    <span className="relative z-10">Log In to Trade</span>
                   </Button>
                 )}
 

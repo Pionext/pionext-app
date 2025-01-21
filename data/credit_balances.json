@@ -1,69 +1,6 @@
 {
   "holdings": [
     {
-      "id": "hold_1",
-      "creditId": "cred_1",
-      "userId": "usr_1",
-      "balance": 1000,
-      "lastUpdated": "2024-03-20T12:00:00Z"
-    },
-    {
-      "id": "hold_2",
-      "creditId": "cred_2",
-      "userId": "usr_2",
-      "balance": 2000,
-      "lastUpdated": "2024-03-20T12:00:00Z"
-    },
-    {
-      "id": "hold_1733999170947",
-      "creditId": "cred_1",
-      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 700,
-      "lastUpdated": "2024-12-13T14:46:53.058Z"
-    },
-    {
-      "id": "hold_1733999755689",
-      "creditId": "cred_4",
-      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 10000,
-      "lastUpdated": "2024-12-12T16:23:42.799Z"
-    },
-    {
-      "id": "hold_1734002030242",
-      "creditId": "cred_1",
-      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
-      "balance": 100,
-      "lastUpdated": "2024-12-12T11:13:50.242Z"
-    },
-    {
-      "id": "hold_1734012784456",
-      "creditId": "cred_3",
-      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
-      "balance": 0,
-      "lastUpdated": "2024-12-12T14:22:20.032Z"
-    },
-    {
-      "id": "hold_1734013113935",
-      "creditId": "cred_3",
-      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
-      "balance": 5000,
-      "lastUpdated": "2024-12-12T14:18:33.935Z"
-    },
-    {
-      "id": "hold_1734016662381",
-      "creditId": "cred_4",
-      "userId": "372752ac-58b5-4816-9cef-482a7a440a9e",
-      "balance": 0,
-      "lastUpdated": "2024-12-12T15:26:54.355Z"
-    },
-    {
-      "id": "hold_1734020516381",
-      "creditId": "cred_4",
-      "userId": "88c208e2-16fd-426b-b701-845d6516afb1",
-      "balance": 1000,
-      "lastUpdated": "2024-12-12T16:24:49.795Z"
-    },
-    {
       "id": "hold_1737454308073",
       "creditId": "cred_5",
       "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",

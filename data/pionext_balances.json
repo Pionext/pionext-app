@@ -1,24 +1,9 @@
 {
   "balances": [
     {
-      "userId": "usr_1",
-      "balance": 1000,
-      "lastUpdated": "2024-03-20T12:00:00Z"
-    },
-    {
       "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
       "balance": 189.57183258666717,
       "lastUpdated": "2025-01-21T10:23:52.319Z"
-    },
-    {
-      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
-      "balance": 157.22246296296296,
-      "lastUpdated": "2024-12-12T14:22:20.032Z"
-    },
-    {
-      "userId": "372752ac-58b5-4816-9cef-482a7a440a9e",
-      "balance": 179.4166666666666,
-      "lastUpdated": "2024-12-12T15:26:54.355Z"
     },
     {
       "userId": "88c208e2-16fd-426b-b701-845d6516afb1",

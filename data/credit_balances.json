@@ -62,6 +62,13 @@
       "userId": "88c208e2-16fd-426b-b701-845d6516afb1",
       "balance": 1000,
       "lastUpdated": "2024-12-12T16:24:49.795Z"
+    },
+    {
+      "id": "hold_1737454308073",
+      "creditId": "cred_5",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "balance": 3434,
+      "lastUpdated": "2025-01-21T10:23:52.319Z"
     }
   ]
 }

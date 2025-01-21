@@ -105,17 +105,19 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
     setPionextAmount(newAmount.toString());
   };
 
-  // Calculate simulation results based on PIONEXT amount
-  const creditAmount = getCreditAmount(Number(pionextAmount) || 0);
+  // Calculate simulation results based on input amount
   const simulation = tradeType === 'buy' 
-    ? simulatePurchase(creditAmount, credits)
-    : simulateSale(creditAmount, credits);
+    ? simulatePurchase(getCreditAmount(Number(pionextAmount) || 0), credits)
+    : simulateSale(Number(pionextAmount) || 0, credits);
 
   const handleTrade = async () => {
     try {
       setError(null);
       setIsLoading(true);
-      await tradeCredits(tradeType, creditAmount);
+      const amount = tradeType === 'buy' 
+        ? getCreditAmount(Number(pionextAmount) || 0)
+        : Number(pionextAmount) || 0;
+      await tradeCredits(tradeType, amount);
       setPionextAmount('');
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to trade credits');
@@ -129,7 +131,7 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
     if (tradeType === 'buy') {
       return pionextBalance >= Number(pionextAmount);
     } else {
-      return holding ? holding.balance >= creditAmount : false;
+      return holding ? holding.balance >= Number(pionextAmount) : false;
     }
   };
 
@@ -229,12 +231,23 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
                   <div className="flex items-center justify-between text-sm mb-2">
                     <span>Amount</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">P${pionextBalance.toLocaleString()}</span>
+                      <span className="text-gray-500">
+                        {tradeType === "buy" 
+                          ? `P$${pionextBalance.toLocaleString()}`
+                          : `${holding?.balance.toLocaleString() || 0} ${credits.symbol}`
+                        }
+                      </span>
                       <Button
                         variant="outline"
                         size="sm"
                         className="h-6 text-xs text-white bg-black hover:bg-gray-800"
-                        onClick={() => setPionextAmount(getMaxAmount())}
+                        onClick={() => {
+                          if (tradeType === "buy") {
+                            setPionextAmount(pionextBalance.toFixed(2));
+                          } else if (holding) {
+                            setPionextAmount(holding.balance.toString());
+                          }
+                        }}
                       >
                         Max
                       </Button>
@@ -248,13 +261,18 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
                       <MinusIcon className="h-4 w-4" />
                     </button>
                     <div className="relative flex-1">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">P$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        {tradeType === "buy" ? "P$" : ""}
+                      </span>
                       <Input
                         type="text"
                         value={pionextAmount}
                         onChange={(e) => handleAmountChange(e.target.value)}
                         placeholder="0"
-                        className="text-center pl-8"
+                        className={cn(
+                          "text-center",
+                          tradeType === "buy" ? "pl-8" : "px-4"
+                        )}
                       />
                     </div>
                     <button
@@ -268,20 +286,37 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
 
                 {simulation && (
                   <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
-                    <div className="flex justify-between text-sm">
-                      <span>Credits to {tradeType}</span>
-                      <span>{creditAmount.toLocaleString()} {credits.symbol}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span>Average Price</span>
-                      <span>P${isNaN(simulation.averagePrice) ? '0.0000' : simulation.averagePrice.toFixed(4)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm font-medium">
-                      <span>Total {tradeType === 'buy' ? 'Cost' : 'Receive'}</span>
-                      <span>
-                        P${Number(pionextAmount).toFixed(2)}
-                      </span>
-                    </div>
+                    {tradeType === "buy" ? (
+                      <>
+                        <div className="flex justify-between text-sm">
+                          <span>Credits to buy</span>
+                          <span>{getCreditAmount(Number(pionextAmount) || 0).toLocaleString()} {credits.symbol}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Average Price</span>
+                          <span>P${isNaN(simulation.averagePrice) ? '0.0000' : simulation.averagePrice.toFixed(4)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm font-medium">
+                          <span>Total Cost</span>
+                          <span>P${Number(pionextAmount).toFixed(2)}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex justify-between text-sm">
+                          <span>Credits to sell</span>
+                          <span>{Number(pionextAmount).toLocaleString()} {credits.symbol}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Average Price</span>
+                          <span>P${isNaN(simulation.averagePrice) ? '0.0000' : simulation.averagePrice.toFixed(4)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm font-medium">
+                          <span>Total Receive</span>
+                          <span>P${(simulation as SaleResult).proceeds.toFixed(2)}</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
 

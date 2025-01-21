@@ -70,7 +70,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Progress</span>
+            <span className="text-gray-500">Funding</span>
             <span className="font-medium">
               {Number.isFinite(project.amountRaised) && Number.isFinite(project.fundingGoal)
                 ? `$${project.amountRaised.toLocaleString(undefined, { maximumFractionDigits: 2 })} / $${project.fundingGoal.toLocaleString(undefined, { maximumFractionDigits: 2 })}`

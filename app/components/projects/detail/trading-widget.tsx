@@ -177,9 +177,12 @@ export function TradingWidget({ projectId, projectName }: TradingWidgetProps) {
         ) : (
           <>
             <div className="flex items-center justify-between">
-              <div>
+              <div className="w-full">
                 <h2 className="text-lg font-semibold">{credits.symbol}</h2>
-                <p className="text-sm text-gray-500">{credits.name}</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-gray-500">{credits.name}</p>
+                  <p className="text-sm text-gray-500">Balance: {holding?.balance.toLocaleString() || 0}</p>
+                </div>
               </div>
             </div>
 

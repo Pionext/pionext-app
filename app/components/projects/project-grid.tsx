@@ -13,6 +13,10 @@ interface Project {
   description: string;
   launchDate: string;
   status: "Active" | "Completed" | "Upcoming";
+  image?: {
+    url: string;
+    alt?: string;
+  };
 }
 
 interface Credit {
@@ -26,53 +30,44 @@ interface Credit {
 }
 
 export function ProjectGrid() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [projects, setProjects] = useState<(Project & { credit?: Credit })[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const loadProjects = () => {
-      const projectsWithCredits = projectsData.projects.map(project => {
-        const credit = creditsData.credits.find(c => c.projectId === project.id);
-        return {
-          ...project,
-          credit,
-          status: project.status as "Active" | "Completed" | "Upcoming"
-        };
-      });
-      setProjects(projectsWithCredits);
-    };
-
-    loadProjects();
+    // Simulate API call delay
+    setTimeout(() => {
+      // Ensure projects have the correct status type
+      const typedProjects = projectsData.projects.map(project => ({
+        ...project,
+        status: project.status as "Active" | "Completed" | "Upcoming"
+      }));
+      setProjects(typedProjects);
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
-  const calculateProjectMetrics = (project: Project & { credit?: Credit }) => {
-    if (!project.credit) {
+  const calculateProjectMetrics = (project: Project) => {
+    const credit = creditsData.credits.find(c => c.projectId === project.id);
+    if (!credit) {
       return {
         tokenPrice: 0,
         amountRaised: 0,
-        fundingGoal: 0
+        fundingGoal: 0,
+        currentSupply: 0,
+        maxSupply: 0
       };
     }
 
-    const currentPrice = calculatePrice(project.credit.currentSupply, {
-      currentSupply: project.credit.currentSupply,
-      maxSupply: project.credit.maxSupply
-    });
-
-    const amountRaised = calculateCurrentRaise({
-      currentSupply: project.credit.currentSupply,
-      maxSupply: project.credit.maxSupply
-    });
-
-    const fundingGoal = calculateTotalRaise({
-      currentSupply: 0,
-      maxSupply: project.credit.maxSupply
-    });
+    const currentPrice = calculatePrice(credit.currentSupply, credit);
+    const amountRaised = calculateCurrentRaise(credit);
+    const fundingGoal = calculateTotalRaise(credit);
 
     return {
       tokenPrice: currentPrice,
       amountRaised,
-      fundingGoal
+      fundingGoal,
+      currentSupply: credit.currentSupply,
+      maxSupply: credit.maxSupply
     };
   };
 
@@ -94,9 +89,10 @@ export function ProjectGrid() {
               key={project.id} 
               project={{
                 ...project,
-                tokenPrice: metrics.tokenPrice,
                 amountRaised: metrics.amountRaised,
-                fundingGoal: metrics.fundingGoal
+                fundingGoal: metrics.fundingGoal,
+                currentSupply: metrics.currentSupply,
+                maxSupply: metrics.maxSupply
               }} 
             />
           );

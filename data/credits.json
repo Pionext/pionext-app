@@ -6,7 +6,7 @@
       "symbol": "DAIL",
       "name": "Dailo Credits",
       "targetPrice": 1,
-      "currentSupply": 3434,
+      "currentSupply": 14005,
       "maxSupply": 15000
     },
     {
@@ -15,7 +15,7 @@
       "symbol": "TLNS",
       "name": "Talens Credits",
       "targetPrice": 1,
-      "currentSupply": 8143,
+      "currentSupply": 35234,
       "maxSupply": 60000
     },
     {
@@ -24,7 +24,7 @@
       "symbol": "WAVV",
       "name": "Wavv Credits",
       "targetPrice": 1,
-      "currentSupply": 0,
+      "currentSupply": 11052,
       "maxSupply": 30000
     }
   ]

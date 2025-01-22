@@ -8,6 +8,24 @@
       "targetPrice": 1,
       "currentSupply": 3434,
       "maxSupply": 15000
+    },
+    {
+      "id": "cred_2",
+      "projectId": "proj_2",
+      "symbol": "TLNS",
+      "name": "Talens Credits",
+      "targetPrice": 1,
+      "currentSupply": 8143,
+      "maxSupply": 60000
+    },
+    {
+      "id": "cred_3",
+      "projectId": "proj_3",
+      "symbol": "WAVV",
+      "name": "Wavv Credits",
+      "targetPrice": 1,
+      "currentSupply": 0,
+      "maxSupply": 30000
     }
   ]
 }

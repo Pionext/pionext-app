@@ -2,7 +2,6 @@ export type MaterialType = "PDF" | "Video" | "Website" | "Other";
 export type ProjectStatus = "Active" | "Completed" | "Upcoming";
 
 export interface ProjectDetails {
-  abstract?: string;
   problemSolution?: {
     problem: string;
     solution: string;
@@ -16,11 +15,8 @@ export interface ProjectDetails {
     steps: string[];
   };
   creditUsage?: {
-    free: string[];
-    premium: {
-      price: number;
-      features: string[];
-    };
+    description: string;
+    examples: string[];
   };
   team?: {
     members: {
@@ -33,7 +29,6 @@ export interface ProjectDetails {
       }[];
     }[];
   };
-  categories?: string[];
 }
 
 export interface Project {

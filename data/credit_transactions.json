@@ -8,6 +8,15 @@
       "amount": 3434,
       "price": 0.2289,
       "timestamp": "2025-01-21T10:23:52.319Z"
+    },
+    {
+      "id": "trd_1737523958207",
+      "creditId": "cred_2",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "buy",
+      "amount": 8143,
+      "price": 0.006139671203703705,
+      "timestamp": "2025-01-22T05:32:38.207Z"
     }
   ]
 }

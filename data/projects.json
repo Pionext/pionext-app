@@ -22,7 +22,6 @@
       "status": "Active",
       "userId": "88c208e2-16fd-426b-b701-845d6516afb1",
       "details": {
-        "abstract": "Dailo transforms educational content into interactive podcast-style conversations using AI. Learn hands-free while commuting or exercising, with the ability to ask questions anytime. Perfect for busy professionals who want to make the most of their time.",
         "problemSolution": {
           "problem": "Traditional online learning requires screen time and active engagement, making it difficult for busy professionals to fit education into their daily routines. Existing audio content like podcasts lacks structure and interactivity, limiting effective learning.",
           "solution": "Our platform transforms learning into an interactive audio experience that combines the casual engagement of podcasts with the structure of formal courses. Users can learn hands-free while commuting or exercising, pause to ask questions, and maintain steady progress through structured content—all through AI-generated conversations that adapt to their learning style and pace."
@@ -68,19 +67,14 @@
           ]
         },
         "creditUsage": {
-          "free": [
+          "description": "Listen to existing podcast-courses with standard host personality. Premium features include episode generation ($0.25 per episode), custom host personalities, and knowledge tests. Monthly subscription available for frequent users.",
+          "examples": [
             "Listen to existing podcast-courses",
-            "Standard host personality"
-          ],
-          "premium": {
-            "price": 9.99,
-            "features": [
-              "10 episode generations included",
-              "Additional episodes: $0.25 each",
-              "Custom host personalities",
-              "Knowledge tests"
-            ]
-          }
+            "Generate new episodes (10 included with subscription)",
+            "Additional episodes: $0.25 each",
+            "Monthly subscription: $9.99",
+            "Custom host personalities included with subscription"
+          ]
         },
         "team": {
           "members": [
@@ -101,13 +95,212 @@
               "bio": "Moritz Stellmacher is a tech entrepreneur with expertise in marketing and blockchain. After scaling a marketing agency and serving as CEO of Abend, he co-founded the leading blockchain education platform Dacade. Currently a partner at Ape Unit, focusing on blockchain development."
             }
           ]
-        },
-        "categories": [
-          "Education",
-          "Podcasts",
-          "AI"
-        ]
+        }
       }
+    },
+    {
+      "id": "proj_2",
+      "name": "Talens",
+      "description": "Talens is an AI-powered talent assessment platform that transforms traditional hiring processes into intelligent, automated evaluations focusing on soft skills. Perfect for companies seeking to tap into emerging market talent pools.",
+      "image": {
+        "url": "/images/projects/talens-cover.jpg",
+        "alt": "Talens - AI-powered talent assessment platform"
+      },
+      "creditSymbol": "TLNS",
+      "targetRaise": 20000,
+      "materials": [
+        {
+          "title": "Talens Website",
+          "url": "https://talensai.com/",
+          "type": "Website"
+        }
+      ],
+      "details": {
+        "problemSolution": {
+          "problem": "Current talent assessment solutions focus primarily on technical skills, missing crucial soft skills needed in the AI era. Traditional assessment methods can't scale effectively, especially for emerging markets, making it difficult for companies to identify and validate talent efficiently.",
+          "solution": "Our platform transforms talent assessment through AI-powered interviews and evaluations that combine multimodal interactions with comprehensive skill analysis. Companies can efficiently assess candidates through automated, responsive interviews that evaluate both technical and soft skills, while candidates can showcase their abilities through a more natural, conversation-based assessment process."
+        },
+        "targetAudience": [
+          "HR professionals looking for scalable soft skill assessment solutions",
+          "Companies seeking to hire talent from emerging markets",
+          "Job seekers wanting to showcase both technical and soft skills",
+          "Organizations transitioning to remote hiring processes"
+        ],
+        "keyFeatures": [
+          {
+            "title": "AI-driven assessments",
+            "description": "Customized interview tasks designed by AI"
+          },
+          {
+            "title": "Multimodal interviews",
+            "description": "Voice-based interactions with AI for natural assessment"
+          },
+          {
+            "title": "Comprehensive analysis",
+            "description": "In-depth evaluation of both technical and soft skills"
+          },
+          {
+            "title": "Blockchain verification",
+            "description": "Secure and transparent credential verification"
+          },
+          {
+            "title": "Employer dashboard",
+            "description": "Detailed analytics and talent insights"
+          },
+          {
+            "title": "Token-based ecosystem",
+            "description": "Incentivized community participation and governance"
+          }
+        ],
+        "howItWorks": {
+          "steps": [
+            "AI designs customized interview tasks to assess candidate soft skills",
+            "Conducts fully automated responsive interviews using multimodality",
+            "Provides in-depth analysis of candidate performance and potential",
+            "Connects pre-vetted talent with global opportunities"
+          ]
+        },
+        "creditUsage": {
+          "description": "Talens operates on a subscription-based model where companies can access our AI-powered assessment platform through different tiers. Each subscription includes a monthly allocation of assessments and features, with the ability to purchase additional assessments as needed.",
+          "examples": [
+            "Basic Plan: 10 assessments/month, basic analytics, standard support - $99/month",
+            "Professional Plan: 50 assessments/month, advanced features, priority support - $399/month",
+            "Enterprise Plan: Unlimited assessments, custom integration, dedicated support - Custom pricing",
+            "Additional Assessment Bundle: 5 assessments - $100",
+            "Talent Premium Access: Unlimited assessments, career insights, priority matching - $199/year"
+          ]
+        },
+        "team": {
+          "members": [
+            {
+              "name": "Fabian Tröltzsch",
+              "role": "CEO",
+              "bio": "Fabian Tröltzsch is a seasoned entrepreneur and business coach who has coached over 300 international freelancers to six-figure success.",
+              "links": []
+            },
+            {
+              "name": "Moritz Stellmacher",
+              "role": "Product / Developer",
+              "bio": "Moritz Stellmacher is a blockchain developer, entrepreneur and founder of Dacade, a leading blockchain training platform since 2017.",
+              "links": []
+            },
+            {
+              "name": "Nathania Wong",
+              "role": "Community and Growth",
+              "bio": "Nathania Wong is a Community and growth manager with over three years' experience in training platforms.",
+              "links": []
+            }
+          ]
+        }
+      },
+      "maxSupply": 60000,
+      "launchDate": "2025-01-22",
+      "status": "Active",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
+    },
+    {
+      "id": "proj_3",
+      "name": "Wavv",
+      "description": "Wavv is a social coordination platform that transforms chaotic group planning into seamless, real-time availability signaling. Perfect for socially active individuals seeking spontaneous connections and efficient social planning.",
+      "image": {
+        "url": "/images/projects/wavv-cover.jpg",
+        "alt": "Wavv - Social coordination platform"
+      },
+      "creditSymbol": "WAVV",
+      "targetRaise": 10000,
+      "materials": [
+        {
+          "title": "Wavv Website",
+          "url": "https://wavvapp.com/",
+          "type": "Website"
+        }
+      ],
+      "details": {
+        "problemSolution": {
+          "problem": "Current social coordination tools like group chats and private messages are messy and inefficient, creating confusion around planning. Organizing meetups requires juggling multiple conversations and platforms, while people often miss out on spontaneous plans due to poor visibility of friends' availability.",
+          "solution": "Our platform revolutionizes social coordination through one-tap availability signaling and real-time friend activity tracking. Users can instantly signal their availability and see which friends are free to hang out, while maintaining privacy through selective sharing controls."
+        },
+        "targetAudience": [
+          "Socially active 20-35 year olds",
+          "Urban communities seeking spontaneous connections",
+          "Web3-native users interested in tokenized social platforms",
+          "Event organizers and social influencers"
+        ],
+        "keyFeatures": [
+          {
+            "title": "One-tap availability",
+            "description": "Instant availability signaling to friends"
+          },
+          {
+            "title": "Real-time friend activity",
+            "description": "Overview of friends' plans and availability"
+          },
+          {
+            "title": "Privacy controls",
+            "description": "Selective sharing with specific friends or groups"
+          },
+          {
+            "title": "Token-based features",
+            "description": "Advanced capabilities unlocked through platform tokens"
+          },
+          {
+            "title": "Professional accounts",
+            "description": "Enhanced visibility for businesses and influencers"
+          },
+          {
+            "title": "Location sharing",
+            "description": "Coordinate meetups efficiently (upcoming)"
+          }
+        ],
+        "howItWorks": {
+          "steps": [
+            "Signal your availability with a single tap",
+            "Choose who sees your availability status",
+            "See which friends are free and what they're planning",
+            "Use credits to unlock premium features"
+          ]
+        },
+        "creditUsage": {
+          "description": "Wavv operates on a freemium model with basic features available to all users and premium features unlocked through token ownership or subscription plans.",
+          "examples": [
+            "Basic Features: Availability signaling, friend activity viewing - Free",
+            "Premium Features: Group creation, future event planning, Calendar integration, location sharing - $9.99/month",
+            "Professional Accounts: Event pinning, enhanced visibility - $29.99/month"
+          ]
+        },
+        "team": {
+          "members": [
+            {
+              "name": "Kirk Henry",
+              "role": "CEO",
+              "bio": "Kirk Henry is an entrepreneur with a decade of experience connecting Berlin's communities and KOLs in events and entertainment.\n",
+              "links": []
+            },
+            {
+              "name": "Araya Wongwan",
+              "role": "Design / Growth",
+              "bio": "Araya Wongwan is a designer, developer, and researcher with 3+ years of Web3 experience in branding, product, strategy, and end-to-end app development.",
+              "links": []
+            },
+            {
+              "name": "Moritz Stellmacher",
+              "role": "Product / Developer",
+              "bio": "Moritz Stellmacher is a blockchain developer and entrepreneur, former editor in chief of berlin culture magazine Proud and founder of blockchain ed-tech platform Dacade.",
+              "links": []
+            },
+            {
+              "name": "Henriette Munezero",
+              "role": "Developer",
+              "bio": "Henriette Munezero is a blockchain and AI developer with experience in building training and evaluation solutions.\n",
+              "links": []
+            }
+          ]
+        }
+      },
+      "maxSupply": 30000,
+      "launchDate": "2025-01-22",
+      "status": "Active",
+      "userId": "88c208e2-16fd-426b-b701-845d6516afb1"
     }
   ]
 }

@@ -39,13 +39,6 @@ export function ProjectDetails({ details }: ProjectDetailsProps) {
               </TabsList>
 
               <TabsContent value="about" className="space-y-6 mt-6">
-                {details.abstract && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Abstract</h3>
-                    <p className="text-gray-600">{details.abstract}</p>
-                  </div>
-                )}
-
                 {details.problemSolution && (
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Problem & Solution</h3>
@@ -103,27 +96,15 @@ export function ProjectDetails({ details }: ProjectDetailsProps) {
 
               <TabsContent value="economics" className="space-y-6 mt-6">
                 {details.creditUsage && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Credit Usage</h3>
-                    <div className="grid gap-6">
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-2">Free Features</h4>
-                        <ul className="list-disc list-inside text-gray-600">
-                          {details.creditUsage.free.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-2">
-                          Premium Features (${details.creditUsage.premium.price}/month)
-                        </h4>
-                        <ul className="list-disc list-inside text-gray-600">
-                          {details.creditUsage.premium.features.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Credit Usage</h3>
+                    <div className="prose prose-sm max-w-none">
+                      <p>{details.creditUsage.description}</p>
+                      <ul>
+                        {details.creditUsage.examples.map((example, index) => (
+                          <li key={index}>{example}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 )}

@@ -126,6 +126,14 @@ export function ProjectOverview({ project }: ProjectOverviewProps) {
         {/* About Tab */}
         {activeTab === "about" && (
           <div className="space-y-8">
+            {/* Project Description */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">About</h3>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <p className="text-gray-600">{project.description}</p>
+              </div>
+            </div>
+
             {/* Problem & Solution */}
             {project.details?.problemSolution && (
               <div>
@@ -195,27 +203,15 @@ export function ProjectOverview({ project }: ProjectOverviewProps) {
         {activeTab === "economics" && (
           <div className="space-y-6">
             {project.details?.creditUsage && (
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Credit Usage</h3>
-                <div className="grid gap-6">
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h4 className="font-medium text-gray-900 mb-2">Free Features</h4>
-                    <ul className="list-disc list-inside text-gray-600">
-                      {project.details.creditUsage.free.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <h4 className="font-medium text-gray-900 mb-2">
-                      Premium Features (${project.details.creditUsage.premium.price}/month)
-                    </h4>
-                    <ul className="list-disc list-inside text-gray-600">
-                      {project.details.creditUsage.premium.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Credit Usage</h3>
+                <div className="prose prose-sm max-w-none text-gray-600">
+                  <p className="mb-4">{project.details.creditUsage.description}</p>
+                  <ul className="list-disc list-inside">
+                    {project.details.creditUsage.examples.map((example, index) => (
+                      <li key={index}>{example}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             )}

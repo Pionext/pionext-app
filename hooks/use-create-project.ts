@@ -3,17 +3,23 @@
 import { useState } from 'react';
 import projectsData from '@/data/projects.json';
 import { calculateRequiredMaxSupply } from '@/utils/bonding-curve';
+import { ProjectDetails } from '@/types/project';
 
 interface CreateProjectData {
   name: string;
   description: string;
   creditSymbol: string;
   targetRaise: number;
+  image?: {
+    url: string;
+    alt?: string;
+  };
   materials: {
     title: string;
     url: string;
     type: "PDF" | "Video" | "Website" | "Other";
   }[];
+  details: ProjectDetails;
 }
 
 export function useCreateProject() {

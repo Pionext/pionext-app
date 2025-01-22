@@ -30,6 +30,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { calculateTotalRaise, getBondingCurvePoints, calculateCurrentRaise, calculateRequiredMaxSupply } from "@/utils/bonding-curve";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useAuth } from "@/hooks/use-auth";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -865,7 +866,11 @@ export function ProjectForm() {
           <Button
             type="submit"
             disabled={isLoading}
-            className={user ? "" : "bg-[#0000FF] hover:bg-[#0000CC] text-white"}
+            variant="outline"
+            className={cn(
+              "border-[#0000FF] text-[#0000FF] hover:bg-[#0000FF] hover:text-white transition-colors",
+              "disabled:opacity-50 disabled:pointer-events-none"
+            )}
           >
             {!user ? "Sign in to Create Project" : isLoading ? "Creating Project..." : "Create Project"}
           </Button>

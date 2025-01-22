@@ -165,7 +165,7 @@ export function Navigation() {
               <Button variant="ghost" asChild>
                 <Link href="/login">Sign In</Link>
               </Button>
-              <Button asChild>
+              <Button className="bg-[#0000FF] hover:bg-[#0000CC] text-white" asChild>
                 <Link href="/register">Sign Up</Link>
               </Button>
             </>

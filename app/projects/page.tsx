@@ -12,7 +12,11 @@ export default function ProjectsPage() {
     <main className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Browse Projects</h1>
-        <Button onClick={() => router.push("/projects/new")}>
+        <Button 
+          onClick={() => router.push("/projects/new")}
+          variant="outline"
+          className="border-[#0000FF] text-[#0000FF] hover:bg-[#0000FF] hover:text-white transition-colors"
+        >
           Create Project
         </Button>
       </div>

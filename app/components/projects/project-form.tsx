@@ -29,6 +29,7 @@ import { useCreateProject } from '@/hooks/use-create-project';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { calculateTotalRaise, getBondingCurvePoints, calculateCurrentRaise, calculateRequiredMaxSupply } from "@/utils/bonding-curve";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useAuth } from "@/hooks/use-auth";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -97,6 +98,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export function ProjectForm() {
   const router = useRouter();
+  const { user } = useAuth();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -206,6 +208,10 @@ export function ProjectForm() {
       <form 
         onSubmit={async (e) => {
           e.preventDefault();
+          if (!user) {
+            router.push('/login');
+            return;
+          }
           console.log('Form submission started');
           const isValid = await form.trigger();
           console.log('Form validation result:', isValid);
@@ -859,8 +865,9 @@ export function ProjectForm() {
           <Button
             type="submit"
             disabled={isLoading}
+            className={user ? "" : "bg-[#0000FF] hover:bg-[#0000CC] text-white"}
           >
-            {isLoading ? "Creating Project..." : "Create Project"}
+            {!user ? "Sign in to Create Project" : isLoading ? "Creating Project..." : "Create Project"}
           </Button>
         </div>
       </form>

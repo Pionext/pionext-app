@@ -21,8 +21,7 @@ export default function ProjectsPage() {
         </Button>
       </div>
       <p className="text-gray-600 mb-8">
-        Discover projects and trade their credits through automated bonding curves. 
-        Early investors benefit from lower initial prices.
+        Discover innovative projects and become an early supporter. Get the best prices by joining early - the sooner you participate, the better the deal!
       </p>
       <ProjectGrid />
     </main>

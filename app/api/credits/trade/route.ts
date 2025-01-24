@@ -1,5 +1,5 @@
 import { PurchaseResult, SaleResult, simulatePurchase, simulateSale } from '@/utils/bonding-curve';
-import { executeTrade } from '@/utils/canister';
+import { executecreditsTransaction } from '@/utils/canister';
 import fs from 'fs/promises';
 import { NextResponse } from 'next/server';
 import path from 'path';
@@ -104,7 +104,7 @@ export async function POST(request: Request) {
     };
     tradesData.trades.push(trade);
 
-    await executeTrade(trade)
+    await executecreditsTransaction(trade)
 
     // Save all changes
     await Promise.all([

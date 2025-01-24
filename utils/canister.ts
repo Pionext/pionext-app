@@ -1,9 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const canisterClient = axios.create({
-    baseURL: `${process.env.CANISTER_API_URL}`
-})
-
+  baseURL: `${process.env.CANISTER_API_URL}`,
+});
 
 type Material = {
   title: string;
@@ -23,15 +22,22 @@ type Project = {
 };
 
 type Transactions = {
-  id: string,
+  id: string;
   userId: string;
   creditId: string;
-  type: 'buy' | 'sell';
+  type: "buy" | "sell" | "purchase";
   amount: number;
-  price: number,
-  timestamp: string
-}
+  price: number;
+  timestamp: string;
+};
 
+export type PionextTransaction = {
+  id: string;
+  userId: string;
+  type: "buy" | "sell" | "purchase";
+  amount: number;
+  timestamp: string;
+};
 
 type Credit = {
   id: string;
@@ -43,20 +49,56 @@ type Credit = {
   maxSupply: number;
 };
 
-export async function executeTrade(tradeRequest: Transactions) {
+export async function executecreditsTransaction(tradeRequest: Transactions) {
   try {
-    const response = await canisterClient.post('/transactions', tradeRequest);
+    const response = await canisterClient.post(
+      "/transactions/credits",
+      tradeRequest
+    );
     return response.data;
   } catch (error) {
-    console.error('Trade execution error:', error);
+    console.error("Trade execution error:", error);
+  }
+}
+
+export async function executePionextTransaction(
+  tradeRequest: PionextTransaction
+) {
+  try {
+    const response = await canisterClient.post(
+      "/transactions/pionext",
+      tradeRequest
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Pionext transaction execution error:", error);
+  }
+}
+
+export async function updateUserPionextPionextBalance(user: {
+  userId: string;
+  balance: number;
+}) {
+  try {
+    const response = await canisterClient.put("/transactions/pionext/balance", {
+      userId: user.userId,
+      balance: user.balance,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Pionext transaction execution error:", error);
   }
 }
 
 export async function createProject(project: Project, credits: Credit) {
   try {
-    const response = await canisterClient.post('/projects', { project, credits });
+    const response = await canisterClient.post("/projects", {
+      project,
+      credits,
+    });
     return response.data;
   } catch (error) {
-    console.error('Create project:', error);
+    console.error("Create project:", error);
   }
 }

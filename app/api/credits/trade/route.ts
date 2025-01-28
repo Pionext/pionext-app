@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server';
+import { PurchaseResult, SaleResult, simulatePurchase, simulateSale } from '@/utils/bonding-curve';
+import { executecreditsTransaction } from '@/utils/canister';
 import fs from 'fs/promises';
+import { NextResponse } from 'next/server';
 import path from 'path';
-import { simulatePurchase, simulateSale, PurchaseResult, SaleResult } from '@/utils/bonding-curve';
 
 interface TradeRequest {
   userId: string;
@@ -102,6 +103,8 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString()
     };
     tradesData.trades.push(trade);
+
+    await executecreditsTransaction(trade)
 
     // Save all changes
     await Promise.all([

@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
+import { createProject } from '@/utils/canister';
 import fs from 'fs/promises';
+import { NextResponse } from 'next/server';
 import path from 'path';
 
 export async function POST(req: Request) {
@@ -63,6 +64,8 @@ export async function POST(req: Request) {
       fs.writeFile(projectsPath, JSON.stringify(projectsData, null, 2)),
       fs.writeFile(creditsPath, JSON.stringify(creditsData, null, 2))
     ]);
+  
+    await createProject(newProject, newCredits);
     
     return NextResponse.json({ project: newProject, credits: newCredits });
   } catch (error) {

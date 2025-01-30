@@ -1,0 +1,25 @@
+{
+  "transactions": [
+    {
+      "id": "txn_1737454308073",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 786.43,
+      "timestamp": "2025-01-21T10:23:52.319Z"
+    },
+    {
+      "id": "txn_1737531015068",
+      "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+      "type": "purchase",
+      "amount": 10,
+      "timestamp": "2025-01-22T07:30:15.068Z"
+    },
+    {
+      "id": "txn_1737531320173",
+      "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+      "type": "purchase",
+      "amount": 10000,
+      "timestamp": "2025-01-22T07:35:20.173Z"
+    }
+  ]
+}

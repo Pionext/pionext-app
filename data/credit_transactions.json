@@ -1,0 +1,67 @@
+{
+    "trades": [
+      {
+        "id": "trd_1737454308073",
+        "creditId": "cred_5",
+        "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+        "type": "buy",
+        "amount": 3434,
+        "price": 0.2289,
+        "timestamp": "2025-01-21T10:23:52.319Z"
+      },
+      {
+        "id": "trd_1737523958207",
+        "creditId": "cred_2",
+        "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+        "type": "buy",
+        "amount": 8143,
+        "price": 0.006139671203703705,
+        "timestamp": "2025-01-22T05:32:38.207Z"
+      },
+      {
+        "id": "trd_1737530949437",
+        "creditId": "cred_5",
+        "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+        "type": "buy",
+        "amount": 181,
+        "price": 0.055221468148148226,
+        "timestamp": "2025-01-22T07:29:09.437Z"
+      },
+      {
+        "id": "trd_1737530965105",
+        "creditId": "cred_5",
+        "userId": "e82d5e0c-5c05-4f75-a44b-8052408bf0b2",
+        "type": "sell",
+        "amount": 10,
+        "price": 0.05792048148148049,
+        "timestamp": "2025-01-22T07:29:25.105Z"
+      },
+      {
+        "id": "trd_1737531337863",
+        "creditId": "cred_5",
+        "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+        "type": "buy",
+        "amount": 10400,
+        "price": 0.38462825925925925,
+        "timestamp": "2025-01-22T07:35:37.863Z"
+      },
+      {
+        "id": "trd_1737531504241",
+        "creditId": "cred_2",
+        "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+        "type": "buy",
+        "amount": 27091,
+        "price": 0.14765311731481484,
+        "timestamp": "2025-01-22T07:38:24.241Z"
+      },
+      {
+        "id": "trd_1737531521812",
+        "creditId": "cred_3",
+        "userId": "95694c4e-c9bc-42d6-a658-5f0e4bd2a359",
+        "type": "buy",
+        "amount": 11052,
+        "price": 0.04523952,
+        "timestamp": "2025-01-22T07:38:41.812Z"
+      }
+    ]
+  }
